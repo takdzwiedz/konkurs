@@ -1,0 +1,35 @@
+.obrazek_naglowek{
+background: url("../img/Warsaw2.png") center center no-repeat;
+background-size: cover;
+height: 100vh;
+overflow-x: hidden;
+margin-top: -21px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+h1{
+    padding-top: 210px;
+    color: black;
+    font-size: 50px;
+    text-align: center;
+}
+
+
+button{
+    margin-top: 10px;
+}
+
+button:hover{
+    border: 1px solid black;
+    transition: 0.2s;
+}
+.stopka p{
+    font-size: 20px;
+}
