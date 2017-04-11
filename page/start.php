@@ -3,6 +3,7 @@
 require_once 'config/Config.php';
 
 //Warunek do zapsywania danych w bazie
+
    
 $polaczenie = new DbConnect();
 
