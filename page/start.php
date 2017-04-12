@@ -178,17 +178,17 @@ require_once 'config/Config.php';
                         </div>
 
         <?php                  
-        $polacz = new DbConnect();
+        $polaczenie = new DbConnect();
 
         $pytanie1 = "SELECT * FROM `pytania` WHERE id_pytania=1";
         $pytanie2 = "SELECT * FROM `pytania` WHERE id_pytania=2";
 
         //Pytanie 1 
-        $wynik = $polacz->db->query($pytanie1);
+        $wynik = $polaczenie->db->query($pytanie1);
         $wynik2 = $wynik->fetch_object();
 
         //Pytanie 2            
-        $wynikk= $polacz->db->query($pytanie2);
+        $wynikk= $polaczenie->db->query($pytanie2);
         $wynikk2 = $wynikk->fetch_object();
         ?>
 
@@ -303,12 +303,8 @@ $(function() {
 });;
     
 </script>
-
-    
+  
 <?php
-
-$polaczenie = new DbConnect();
-
 if(isset($_POST['send_button'])){
     
     $name_field = trim($_POST['name_field']);
@@ -361,7 +357,6 @@ if(isset($_POST['send_button'])){
     $walidacja->czyCalkowita($phone_number, 'Telephone');
     $walidacja->maxIloscZnakow($phone_number, 'Telephone', 12);
     
-    
     //Walidacja adresu
     $walidacja->puste($address_to_send_prize, 'Address');
     
@@ -374,10 +369,10 @@ if(isset($_POST['send_button'])){
     if($walidacja->liczError==0){
         
         $sex_field = $_POST['sex_field'];
-        $wstaw = "INSERT INTO `uzytkownicy`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_filed`, `phone_filed`, `adress_to_send_prize`, `first_question`, `second_question`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field','$address_to_send_prize', '$first_question', '$second_question','$when')";
+        $wstaw = "INSERT INTO `uzytkownicy`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `adress_to_send_prize`, `first_question`, `second_question`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field','$address_to_send_prize', '$first_question', '$second_question','$when')";
         $umiesc = $polaczenie->db->query($wstaw);
         
-        $polacz = new DbConnect();
+        $polaczenie = new DbConnect();
         $pytanie1 = "SELECT * FROM `pytania` WHERE id_pytania=1";
         $pytanie2 = "SELECT * FROM `pytania` WHERE id_pytania=2";
         $odp1=$_POST['pierwsze'];
@@ -385,18 +380,36 @@ if(isset($_POST['send_button'])){
         $odp1true=$wynik2->Opowiedz_Poprawna;
         $odp2true=$wynikk2->Opowiedz_Poprawna;
         
-        if($odp1==$odp1true&&$odp2==$odp2true){
-
-            echo '<span style="color:green;">Congratulation!<br>Check Your e-mail and claim Your prize!</span>';
-            $wyslij_maila = new SendMail(E_MAIL_ADMIN);
-                $subject = 'Thank You for registration in contest About Warsaw!';
-                $to = $e_mail_field ;// to trzeba wstawic maila z formularz
-                $message = "Name: $name_field<br>Surname: $surname_field<br>Date of Birth: $birth_date_field<br>Sex: $sex_field<br>e-mail: $e_mail_field<br>Phone: $phone_field<br>Address to send prize: $address_to_send_prize<br>First question: $first_question<br>Second question: $second_question";
+        //Jeżeli użytwkownik wypełnił prawidłowo formularz i zaakceptował regulamin to jego odpowiedzi zapisują się w bazie danych i otrzymuje mejla.
+        //Jeżeli odpowiedział poprawnie to otrzymuje nagodę co zostanie wyswietlone w komunikacie i w mejlu
+        
+        $wyslij_maila = new SendMail(E_MAIL_ADMIN);
+        $subject = 'Thank You for registration in contest about Warsaw!';
+        $to = $e_mail_field ;
+        $message ="Name: $name_field<br>Surname: $surname_field,<br>"
+                ."Date of Birth: $birth_date_field,<br>"
+                ."Sex: $sex_field,<br>e-mail: $e_mail_field,<br>"
+                ."Phone: $phone_field,<br>Address to send prize: $address_to_send_prize,<br>"
+                ."First question - Your answer: $first_question,<br>"
+                ."First question - proper answer: $odp1true,<br>"
+                ."Second question - Your answer: $second_question,<br>"
+                ."Second question - proper answer: $odp2true.";
                 
+        if($odp1==$odp1true&&$odp2==$odp2true){
+            $wyslij_maila->send($to, $subject, $message);
+            echo '<span style="color:green;">You are a Winner!<br>Check Your e-mail!</span>';
+                $message.="<br><br>You won a prize!<br>"
+                        . "We will send You a gift for the address from the form.<br><br>"
+                        . "Regards,<br>"
+                        . "Contest Team";
                 $wyslij_maila->send($to, $subject, $message);
-
         }else{
-            echo 'Thank You for participating in the contest About Warsaw!';
+            echo '<span style="color:green;">Thank You for participating in the contest about Warsaw!<br>Check Your e-mail!</span>';
+                $message.= "<br><br>You did not won a prize this time.<br>"
+                        . "Try again later.<br><br>"
+                        . "Regards,<br>"
+                        . "Contest Team";
+                $wyslij_maila->send($to, $subject, $message);
         }
     }    
 }

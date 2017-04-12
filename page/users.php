@@ -49,7 +49,6 @@ $connection = new DbConnect();
             <td>First question answer</td>
             <td>Second question answer</td>
             <td>Date of registration</td>
-            
         </tr>
        
             <?php
@@ -79,12 +78,9 @@ $connection = new DbConnect();
             if(isset($_GET['action']) && $_GET['action']=='filter_by_good_all_question'){
                 $request .= "WHERE `first_question`='1 748 916' AND `second_question`='7'";
             }
-            
-            
             // SORTOWANIE
             
             //Sortowanie NAME
-            
             if(isset($_GET['action']) && $_GET['action'] == 'order_by_name_up' && !empty($_GET['action'])){
                 $request .= " ORDER BY `name_field` ASC";
             }
@@ -107,12 +103,11 @@ $connection = new DbConnect();
             }
             //SORTOWANIE E-MAIL
             if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_up' && !empty($_GET['action'])){
-                $request .= " ORDER BY `e_mail_filed` ASC";
+                $request .= " ORDER BY `e_mail_field` ASC";
             }
             if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_down' && !empty($_GET['action'])){
-                $request .= " ORDER BY `e_mail_filed` DESC";
+                $request .= " ORDER BY `e_mail_field` DESC";
             }
-            
             //Wyśwetlenie użytkników
             
             $result = $connection->db->query($request);
@@ -126,8 +121,8 @@ $connection = new DbConnect();
                         <td>$row->surname_field</td>
                         <td>$row->birth_date_field</td>
                         <td>$row->sex_field</td>   
-                        <td>$row->e_mail_filed</td>
-                        <td>$row->phone_filed</td>
+                        <td>$row->e_mail_field</td>
+                        <td>$row->phone_field</td>
                         <td>$row->adress_to_send_prize</td>
                         <td>$row->first_question</td>
                         <td>$row->second_question</td>
