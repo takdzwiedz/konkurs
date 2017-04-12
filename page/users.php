@@ -7,7 +7,7 @@ $connection = new DbConnect();
 
 <!--- Klawisze do filtrowania --->
 
-<a href="?page=users&action=filter_by_sex_m"><button type="button">Filter by  MALE</button></a>
+<a href="?page=users&action=filter_by_sex_m"><button type="button">Filter by Sex MALE</button></a>
 <a href="?page=users&action=filter_by_sex_f"><button type="button">Filter by Sex FEMALE</button></a>
 
 <a href="?page=users&action=filter_by_good_first_question"><button type="button">Filter by good 1st Question</button></a>

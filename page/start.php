@@ -414,4 +414,5 @@ if(isset($_POST['send_button'])){
     }    
 }
 unset ($walidacja);
+
 ?>
