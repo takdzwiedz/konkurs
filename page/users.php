@@ -9,7 +9,6 @@ $request = "SELECT * FROM `uzytkownicy`";
 
 //Filtrowanie SEX
 
-
 $filter_by_sex = 'f';
 if(isset($_GET['action']) && $_GET['action']=='filter_by_sex_m'){
     $request .= "WHERE `sex_field`='male'";
@@ -88,7 +87,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_down' && !empty
 
 ?>
 
-<!--- Klawisze do filtrowania --->
+<!--- Dopdowny do filtrowania --->
 
 <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by sex
@@ -140,6 +139,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_down' && !empty
             <td>Address</td>
             <td>First question answer</td>
             <td>Second question answer</td>
+            <td>Third question answer</td>
+            <td>Forth question answer</td>
             <td>Date of registration</td>
         </tr>
        
@@ -163,6 +164,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_down' && !empty
                         <td>$row->adress_to_send_prize</td>
                         <td>$row->first_question</td>
                         <td>$row->second_question</td>
+                        <td>$row->third_question</td>
+                        <td>$row->forth_question</td>
                         <td>$row->date</td>
                     </td>
                     ";
