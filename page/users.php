@@ -3,13 +3,84 @@ require_once 'config/Config.php';
 
 $connection = new DbConnect();
 
+$request = "SELECT * FROM `uzytkownicy`";
+
+//Filtrowanie
+
+//Filtrowanie SEX
+
+
+$filter_by_sex = 'f';
+if(isset($_GET['action']) && $_GET['action']=='filter_by_sex_m'){
+    $filter_by_sex = 'f';
+    $request .= "WHERE `sex_field`='male'";
+}
+if(isset($_GET['action']) && $_GET['action']=='filter_by_sex_f'){
+    $filter_by_sex = 'm';
+    $request .= "WHERE `sex_field`='female'";
+}
+//Filtrowanie 1 pytanie
+
+if(isset($_GET['action']) && $_GET['action']=='filter_by_good_first_question'){
+    $request .= "WHERE `first_question`='1 748 916'";
+}
+//Filtrowanie 2 pytanie
+if(isset($_GET['action']) && $_GET['action']=='filter_by_good_second_question'){
+    $request .= "WHERE `second_question`='7'";
+}
+//Filtrowania oba pytania
+if(isset($_GET['action']) && $_GET['action']=='filter_by_good_all_question'){
+    $request .= "WHERE `first_question`='1 748 916' AND `second_question`='7'";
+}
+// SORTOWANIE
+
+//Sortowanie NAME
+
+$order_by_name='up';
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_name_up' && !empty($_GET['action'])){
+    $order_by_name='down';
+    $request .= " ORDER BY `name_field` ASC";
+}
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_name_down' && !empty($_GET['action'])){
+    $order_by_name='up';
+    $request .= " ORDER BY `name_field` DESC";
+}
+//Sortowanie SURNAME
+$order_by_surname = 'up';
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_surname_up' && !empty($_GET['action'])){
+    $order_by_surname = 'down';
+    $request .= " ORDER BY `surname_field` ASC";
+}
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_surname_down' && !empty($_GET['action'])){
+    $order_by_surname = 'up';
+    $request .= " ORDER BY `surname_field` DESC";
+}
+// Sortowanie SEX
+$order_by_sex='up';
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_sex_up' && !empty($_GET['action'])){
+    $order_by_sex='down';
+    $request .= " ORDER BY `sex_field` ASC";
+}
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_sex_down' && !empty($_GET['action'])){
+    $order_by_sex='up';
+    $request .= " ORDER BY `sex_field` DESC";
+}
+//SORTOWANIE E-MAIL
+$order_by_e_mail = 'up';
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_up' && !empty($_GET['action'])){
+    $order_by_e_mail = 'down';
+    $request .= " ORDER BY `e_mail_field` ASC";
+}
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_down' && !empty($_GET['action'])){
+    $order_by_e_mail = 'up';
+    $request .= " ORDER BY `e_mail_field` DESC";
+}
+
 ?>
 
 <!--- Klawisze do filtrowania --->
 
-<a href="?page=users&action=filter_by_sex_m"><button type="button">Filter by Sex MALE</button></a>
-<a href="?page=users&action=filter_by_sex_f"><button type="button">Filter by Sex FEMALE</button></a>
-
+<a href="?page=users&action=filter_by_sex_<?php echo $filter_by_sex ?>"><button type="button" class="btn brn-default dropdown-toggle">Filter by SEX</button></a>
 <a href="?page=users&action=filter_by_good_first_question"><button type="button">Filter by good 1st Question</button></a>
 <a href="?page=users&action=filter_by_good_second_question"><button type="button">Filter by good 2st Question</button></a>
 <a href="?page=users&action=filter_by_good_all_question"><button type="button">Filter by good all Question</button></a>
@@ -17,17 +88,13 @@ $connection = new DbConnect();
 
 <!--- Klawisze do sortowania --->
 
-<a href="?page=users&action=order_by_name_up"><button type="button">Order by Name UP</button></a>
-<a href="?page=users&action=order_by_name_down"><button type="button">Order by Name DOWN</button></a>
+<a href="?page=users&action=order_by_name_<?php echo $order_by_name ?>"><button type="button">Order by Name</button></a>
 
-<a href="?page=users&action=order_by_surname_up"><button type="button">Order by Surname UP</button></a>
-<a href="?page=users&action=order_by_surname_down"><button type="button">Order by Surname DOWN</button></a>
+<a href="?page=users&action=order_by_surname_<?php echo $order_by_surname ?>"><button type="button">Order by Surname</button></a>
 
-<a href="?page=users&action=order_by_sex_up"><button type="button">Order by Sex UP</button></a>
-<a href="?page=users&action=order_by_sex_down"><button type="button">Order by Sex DOWN</button></a>
+<a href="?page=users&action=order_by_sex_<?php echo $order_by_sex ?>"><button type="button">Order by Sex</button></a>
 
-<a href="?page=users&action=order_by_e_mail_up"><button type="button">Order by e-mail UP</button></a>
-<a href="?page=users&action=order_by_e_mail_down"><button type="button">Order by e-mail DOWN</button></a>
+<a href="?page=users&action=order_by_e_mail_<?php echo $order_by_e_mail ?>"><button type="button">Order by e-mail</button></a>
 
 <!--- Klawisz czyszczenia zapytań --->
 <br>
@@ -53,61 +120,6 @@ $connection = new DbConnect();
        
             <?php
             
-            $request = "SELECT * FROM `uzytkownicy`";
-            
-            //Filtrowanie
-            
-            //Filtrowanie SEX
-            
-            if(isset($_GET['action']) && $_GET['action']=='filter_by_sex_m'){
-                $request .= "WHERE `sex_field`='male'";
-            }
-            if(isset($_GET['action']) && $_GET['action']=='filter_by_sex_f'){
-                $request .= "WHERE `sex_field`='female'";
-            }
-            //Filtrowanie 1 pytanie
-            
-            if(isset($_GET['action']) && $_GET['action']=='filter_by_good_first_question'){
-                $request .= "WHERE `first_question`='1 748 916'";
-            }
-            //Filtrowanie 2 pytanie
-            if(isset($_GET['action']) && $_GET['action']=='filter_by_good_second_question'){
-                $request .= "WHERE `second_question`='7'";
-            }
-            //Filtrowania oba pytania
-            if(isset($_GET['action']) && $_GET['action']=='filter_by_good_all_question'){
-                $request .= "WHERE `first_question`='1 748 916' AND `second_question`='7'";
-            }
-            // SORTOWANIE
-            
-            //Sortowanie NAME
-            if(isset($_GET['action']) && $_GET['action'] == 'order_by_name_up' && !empty($_GET['action'])){
-                $request .= " ORDER BY `name_field` ASC";
-            }
-            if(isset($_GET['action']) && $_GET['action'] == 'order_by_name_down' && !empty($_GET['action'])){
-                $request .= " ORDER BY `name_field` DESC";
-            }
-            //Sortowanie SURNAME
-            if(isset($_GET['action']) && $_GET['action'] == 'order_by_surname_up' && !empty($_GET['action'])){
-                $request .= " ORDER BY `surname_field` ASC";
-            }
-            if(isset($_GET['action']) && $_GET['action'] == 'order_by_surname_down' && !empty($_GET['action'])){
-                $request .= " ORDER BY `surname_field` DESC";
-            }
-            // Sortowanie SEX
-            if(isset($_GET['action']) && $_GET['action'] == 'order_by_sex_up' && !empty($_GET['action'])){
-                $request .= " ORDER BY `sex_field` ASC";
-            }
-            if(isset($_GET['action']) && $_GET['action'] == 'order_by_sex_down' && !empty($_GET['action'])){
-                $request .= " ORDER BY `sex_field` DESC";
-            }
-            //SORTOWANIE E-MAIL
-            if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_up' && !empty($_GET['action'])){
-                $request .= " ORDER BY `e_mail_field` ASC";
-            }
-            if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_down' && !empty($_GET['action'])){
-                $request .= " ORDER BY `e_mail_field` DESC";
-            }
             //Wyśwetlenie użytkników
             
             $result = $connection->db->query($request);
