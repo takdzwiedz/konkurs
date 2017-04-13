@@ -443,52 +443,6 @@ $(function() {
 $polaczenie = new DbConnect();
 
 $zmienna=$_GET['zmienna'];
-
-
-    $when = date('Y-m-d');
-    
-    //Walidacja
-    $walidacja = new Validate();
-    
-    //Walidacja imienia
-    $walidacja->puste($name_field, 'Name');
-    $walidacja->maxIloscZnakow($name_field, 'Name', 25);
-    $walidacja->znakiOK($name_field, 'Name');
-    
-    //Walidacja nazwiska
-    $walidacja->puste($surname_field, 'Surname');
-    $walidacja->maxIloscZnakow($surname_field, 'Surname', 40);
-    $walidacja->znakiOK($surname_field, 'Surname');
-    $walidacja->maxIloscZnakow($post_code, 'Postal Code', 8);
-    $walidacja->puste($post_code, 'Postal Code');
-    $walidacja->puste($street,  'street');
-    $walidacja->maxIloscZnakow($street, 'street', 50);
-    //Walidacja daty - niepotrzebna bo selecty w html
-    
-    //Walidacja płci
-    
-    if(!isset($_POST['sex_field'])){
-        $walidacja->isChecked('Sex');
-    }
- 
-    //Weryfikacja e-maila
-    $walidacja->weryfikacjaMaila($e_mail_field, 'e-mail');
-    
-    //Walidacja telefonu
-    $walidacja->puste($prefix_field, 'Prefix');
-    $walidacja->puste($phone_number, 'Phone number');
-    $walidacja->czyCalkowita($phone_number, 'Telephone');
-    $walidacja->maxIloscZnakow($phone_number, 'Telephone', 12);
-    
-    //Walidacja adresu
-    
-    $walidacja->puste($street, 'Street');
-    $walidacja->puste($building, 'Building');
-    $walidacja->puste($post_code, 'Post code');
-//    $walidacja->walidacjaKodu($post_code, 'Post code');
-    $walidacja->puste($city_name, 'City name');
-    $walidacja->puste($country, 'Country');
-
 $if_zmienna_correct_request_query = "SELECT * FROM `kody` WHERE `kod`='$zmienna'";
 $if_zmienna_correct_request = $polaczenie->db->query($if_zmienna_correct_request_query);
 
