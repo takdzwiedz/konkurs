@@ -26,7 +26,7 @@ class Validate {
         //Trim obcina znaki na początku i końcu a empty sprawdza czy nie jest puste.
         
         if (empty(trim($ciag))){
-            $this->AddError("Pole $pole nie może być puste.");
+            $this->AddError("Please insert something into $pole.");
             $this->liczError++;
         }
         
@@ -58,8 +58,8 @@ class Validate {
     function znakiOK ($ciag, $pole){
         
         //Do sprawdzenia
-        if(!preg_match('/[a-z_.]/', $ciag)){
-            $this->AddError("Pole $pole może zawierać litery i kropki");
+        if(!preg_match('/[a-z]/', $ciag)){
+            $this->AddError("Pelase insert only capital letter into $pole");
             $this->liczError++;
         }
     }
@@ -71,6 +71,14 @@ class Validate {
         }
     }
     
+    function maxIloscZnakow ($ciag,$pole,$max){
+        if(strlen(trim($ciag))> $max){
+            $this->AddError("Max amount of characters in $pole is $max.");
+            $this->liczError++;
+        }
+    }
+    
+    
     function takieSame ($ciag, $pole, $ciag2, $pole2){
         if($ciag!=$ciag2){
             $this->AddError("Pole $pole2 ma być takie samo, jak pole $pole.");
@@ -80,14 +88,21 @@ class Validate {
     
     function weryfikacjaMaila ($ciag, $pole){
         if (!filter_var($ciag, FILTER_VALIDATE_EMAIL)) {
-            $this->AddError("Pole $pole nie jest prawidłowym adresem e-mail");
+            $this->AddError("Please insert propper $pole address.");
+            $this->liczError++;
+        }
+    }
+    
+    function walidacjaKodu ($ciag, $pole){
+        if(preg_match('/^([0-9]{2})(-[0-9]{3})?$/i', $ciag)){
+            $this->AddError("Please insert proper postal code into $pole");
             $this->liczError++;
         }
     }
     
     function czyCalkowita ($ciag, $pole){
         if (!filter_var($ciag, FILTER_VALIDATE_INT)) {
-            $this->AddError("Pole $pole ma być liczbą całkowitą");
+            $this->AddError("Plese insert digits into $pole");
             $this->liczError++;
         }
     }
@@ -108,7 +123,7 @@ class Validate {
     }
     
     function isChecked ($pole){
-            $this->AddError("Zaznacz pole $pole");
+            $this->AddError("Please thick $pole");
             $this->liczError++;
     
     }
@@ -125,7 +140,7 @@ class Validate {
     
     function __destruct(){
         if(!empty($this->error)){
-            echo '<div class="error">'.$this->error.'</div>';
+            echo '<div class="error" style="color:red;">'.$this->error.'</div>';
         }
     }
     
