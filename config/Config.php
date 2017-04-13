@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ERROR|E_WARNING);
 define('E_MAIL_ADMIN','konkurs-warszawa@serwer1765054.home.pl');
 define('SERVER','localhost');
 define('USER','root');

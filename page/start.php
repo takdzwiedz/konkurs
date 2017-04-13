@@ -388,6 +388,7 @@ require_once 'config/Config.php';
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="przesylka" value="<?php $street ?>"
 
                         <input class="btn btn-primary" type="submit" name="send_button" value="Wyślij">
 
@@ -565,6 +566,10 @@ if(isset($_POST['send_button'])){
                 ."Sex: $sex_field,<br>e-mail: $e_mail_field,<br>"
                 ."Phone: $phone_field,<br>"
                 ."Street: $street,<br>"
+                ."Building number: $building<br>"
+                ."Flat number: $flat<br>"
+                ."Postal Code: $post_code<br>"
+                ."City $city_name<br>"
                 ."First question - Your answer: $first_question,<br>"
                 ."First question - proper answer: $odp1true,<br>"
                 ."Second question - Your answer: $second_question,<br>"
@@ -572,8 +577,12 @@ if(isset($_POST['send_button'])){
                 . "Third question - Your answer: $third_question,<br>"
                 . "Third question - proper answer: $odp3true,<br>"
                 . "Forth question - Your answer: $forth_question,<br>"
-                . "Forth question - proper answer: $odp4true.";
-        
+                . "Forth question - proper answer: $odp4true."
+                
+                ;
+        ?>
+
+        <?php
         
         if($odp1==$odp1true && $odp2==$odp2true && $odp3==$odp3true && $odp4==$odp4true){
             $wyslij_maila->send($to, $subject, $message);
@@ -583,6 +592,7 @@ if(isset($_POST['send_button'])){
                         . "Regards,<br>"
                         . "Contest Team";
                 $wyslij_maila->send($to, $subject, $message);
+               header('Location:index.php?page=koncowa');
         }else{
             echo '<span style="color:green;">Thank You for participating in the contest about Warsaw!<br>Check Your e-mail!</span>';
                 $message.= "<br><br>You did not won a prize this time.<br>"
