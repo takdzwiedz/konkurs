@@ -388,7 +388,7 @@ require_once 'config/Config.php';
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="przesylka" value="<?php $street ?>"
+                        <input type="hidden" name="przesylka1" value="<?php $street ?>"
 
                         <input class="btn btn-primary" type="submit" name="send_button" value="Wyślij">
 
