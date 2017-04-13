@@ -1,22 +1,37 @@
 <?php
 
-$page = 'start';
-$title = 'Contest about Warsaw';
+$page = 'strona_z_kodem';
+$title = 'Konkurs';
     
 if(isset($_GET['page'])){
-    $page = $_GET['page'];
+  $page = $_GET['page'];
+    
 
     switch ($page){
 
-        case('users'):
-
-            $page = 'users';
-            $title = 'List of participants';
-            break;
-         
-        default:
+        case('start'):
 
             $page = 'start';
-            $title = 'Contest about Warsaw';
+            $title = 'Konkurs';
+             break;
+         case('dlaKlienta'):
+
+            $page = 'dlaKlienta';
+            $title = 'dlaKlienta';
+             break;
+         case('koncowa'):
+
+            $page = 'koncowa';
+            $title = 'koncowa';
+             break;
+//         case('strona_z_kodem'):
+//
+//            $page = 'strona_z_kodem';
+//            $title = 'strona_z_kodem';
+//             break;
+        default:
+          
+            $page = 'strona_z_kodem';
     }
+    
 }
