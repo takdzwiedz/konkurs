@@ -494,6 +494,10 @@ if(isset($_POST['send_button'])){
     $walidacja->puste($post_code, 'Postal Code');
     $walidacja->puste($street,  'street');
     $walidacja->maxIloscZnakow($street, 'street', 50);
+     $walidacja->puste($building,  'street');
+    $walidacja->maxIloscZnakow($building, 'building', 50);
+     $walidacja->puste($city_name,  'street');
+    $walidacja->maxIloscZnakow($city_name, 'city', 50);
     //Walidacja daty - niepotrzebna bo selecty w html
     
     //Walidacja płci
