@@ -1,6 +1,7 @@
 <?php
-require_once 'config/Config.php';
-
+require_once '../config/Config.php';
+require_once '../class/DbConnect.php';
+require_once '../class/SendMail.php';
 $connection = new DbConnect();
 
 $request = "SELECT * FROM `uzytkownicy`";
