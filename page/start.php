@@ -490,8 +490,10 @@ if(isset($_POST['send_button'])){
     $walidacja->puste($surname_field, 'Surname');
     $walidacja->maxIloscZnakow($surname_field, 'Surname', 40);
     $walidacja->znakiOK($surname_field, 'Surname');
-    
-    
+    $walidacja->maxIloscZnakow($post_code, 'Postal Code', 8);
+    $walidacja->puste($post_code, 'Postal Code');
+    $walidacja->puste($street,  'street');
+    $walidacja->maxIloscZnakow($street, 'street', 50);
     //Walidacja daty - niepotrzebna bo selecty w html
     
     //Walidacja płci

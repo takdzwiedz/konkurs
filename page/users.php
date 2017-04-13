@@ -1,3 +1,7 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <?php
 require_once '../config/Config.php';
 require_once '../class/DbConnect.php';
@@ -85,27 +89,55 @@ if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_down' && !empty
     $order_by_e_mail = 'up';
     $request .= " ORDER BY `e_mail_field` DESC";
 }
-
+// order city name
+$order_by_city_name= 'up';
+ $button_city_name = 'Order by city name ↑';
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_city_name_down' && !empty($_GET['action'])){
+    $button_city_name = 'Order by city name ↑';
+    $order_by_city_name= 'up';
+    $request .= " ORDER BY `city_name` DESC";
+}
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_city_name_up' && !empty($_GET['action'])){
+    $button_city_name = 'Order by city name ↓';
+    $order_by_city_name= 'down';
+    $request .= " ORDER BY `city_name` ASC";
+}
+//order country name
+$order_by_country_name='up';
+$button_country_name='Order by country name ↑';
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_country_name' && !empty($_GET['action'])){
+    $button_country_name = 'Order by country name ↓';
+    $order_by_country_name= 'down';
+    $request .= " ORDER BY `city_name` ASC";
+}
+if(isset($_GET['action']) && $_GET['action'] == 'order_by_country_name' && !empty($_GET['action'])){
+    $button_country_name = 'Order by country name ↑';
+    $order_by_country_name= 'up';
+    $request .= " ORDER BY `city_name` DESC";
+}
 ?>
 
 <!--- Dopdowny do filtrowania --->
 
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by sex
-  <span class="caret"></span></button>
+   <div class="btn-group">
+  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ Filter by name <span class="caret"></span>
+  </button>
   <ul class="dropdown-menu">
-    <li><a href="?page=users&action=filter_by_sex_f"><button type="button" class="btn brn-default dropdown-toggle">Female</button></a></li>
-    <li><a href="?page=users&action=filter_by_sex_m"><button type="button" class="btn brn-default dropdown-toggle">Male</button></a></li>
+    <li><a href="?page=users&action=filter_by_sex_f"><button type="button" class="btn btn-success dropdown-toggle">Female</button></a></li>
+    <li><a href="?page=users&action=filter_by_sex_m"><button type="button" class="btn btn-success dropdown-toggle">Male</button></a></li>
   </ul>
 </div>
 
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by question
-  <span class="caret"></span></button>
+<div class="btn-group">
+  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Filter by question
+  <span class="caret"></span>
+  </button>
   <ul class="dropdown-menu">
-    <li><a href="?page=users&action=filter_by_good_first_question"><button type="button">Filter by good Good 1st Answer</button></a></li>
-    <li><a href="?page=users&action=filter_by_good_second_question"><button type="button">Filter by good Good 2nd Answer</button></a></li>
-    <li><a href="?page=users&action=filter_by_good_all_question"><button type="button">Filter by good Good All Answer</button></a></li>
+    <li><a href="?page=users&action=filter_by_good_first_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good 1st Answer</button></a></li>
+    <li><a href="?page=users&action=filter_by_good_second_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good 2nd Answer</button></a></li>
+    <li><a href="?page=users&action=filter_by_good_all_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good All Answer</button></a></li>
     <li>
   </ul>
 </div>
@@ -113,22 +145,25 @@ if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_down' && !empty
 
 <!--- Klawisze do sortowania --->
 
-<a href="?page=users&action=order_by_name_<?php echo $order_by_name ?>"><button type="button"><?php echo $button_name_name ?></button></a>
+<a href="?page=users&action=order_by_name_<?php echo $order_by_name ?>"><button type="button" class="btn btn-primary dropdown-toggle"><?php echo $button_name_name ?></button></a>
 
-<a href="?page=users&action=order_by_surname_<?php echo $order_by_surname ?>"><button type="button"><?php echo $button_name_surname ?></button></a>
+<a href="?page=users&action=order_by_surname_<?php echo $order_by_surname ?>"><button type="button" class="btn btn-primary dropdown-toggle"><?php echo $button_name_surname ?></button></a>
 
-<a href="?page=users&action=order_by_sex_<?php echo $order_by_sex ?>"><button type="button"><?php echo $button_name_sex ?></button></a>
+<a href="?page=users&action=order_by_sex_<?php echo $order_by_sex ?>"><button type="button" class="btn btn-primary dropdown-toggle"><?php echo $button_name_sex ?></button></a>
 
-<a href="?page=users&action=order_by_e_mail_<?php echo $order_by_e_mail ?>"><button type="button"><?php echo $button_name_e_mail ?></button></a>
+
+<a href="?page=users&action=order_by_city_name_<?php echo $order_by_city_name ?>"><button type="button" class="btn btn-primary dropdown-toggle"><?php echo $button_city_name ?></button></a>
+
+<a href="?page=users&action=order_by_country_name_<?php echo $order_by_country_name ?>"><button type="button" class="btn btn-primary dropdown-toggle"><?php echo $button_country_name ?></button></a>
 
 <!--- Klawisz czyszczenia zapytań --->
 <br>
-<a href="?page=users"><button type="button">Clear Filtering And Ordering</button></a>
+<a href="?page=users"><button type="button" class="btn btn-primary dropdown-toggle">Clear Filtering And Ordering</button></a>
 
 <!---  Struktura tabeli --->
 
-<table>
-    <thead>
+<table class="table table-striped" style="border:1px solid black"> 
+    <thead class="table table-striped">
         <tr>
             <td>Lp.</td>
             <td>Name</td>
