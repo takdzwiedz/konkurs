@@ -6,6 +6,7 @@
 
 //require_once '../config/Config.php';
 //require_once '../class/DbConnect.php';
+
 $zmienna11=1;
 $polacz = new DbConnect();
 if(isset($_POST['wyslijkod'])){
@@ -13,20 +14,15 @@ if(isset($_POST['wyslijkod'])){
     $znajdz = "SELECT * FROM `kody` WHERE `kod`='$kod'";
     $wynik = $polacz->db->query($znajdz);
        if($wynik->num_rows!=0){
-//           $usun = "DELETE FROM `kody` WHERE `kod`=$kod";
-//           $wynikk = $polacz->db->query($usun);
-//           $zmienna11=1;
-//           $page='start';
-           header('Location:index.php?page=start&zmienna=1');
+
+           header("Location:index.php?page=start&zmienna=$kod");
 //         echo "  <a href=\"index.php?page=start\">przejscie do formularza</a> ";
       
        }
        else{
-    echo 'błędny kod';
+    echo '<span class="error">Błędny kod</span>';
 }
-//        echo $wynik2;
-//        exit();
-    
+
 }//end ifsset
 
 
