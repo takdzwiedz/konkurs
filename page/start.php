@@ -1,6 +1,7 @@
 <?php
-
+ob_start();
 require_once 'config/Config.php';
+
 
 ?>
     <header>
@@ -439,43 +440,11 @@ $(function() {
 </script>
   
 <?php
-$zmienna=0;
-if(isset($_GET['zmienna'])){
-    $zmienna = $_GET['zmienna'];
-}
 
-if($zmienna==1){
-   $zmienna=0;
 $polaczenie = new DbConnect();
 
-if(isset($_POST['send_button'])){
-    
-    $name_field = trim($_POST['name_field']);
-    $surname_field = trim($_POST['surname_field']);
+$zmienna=$_GET['zmienna'];
 
-    $birth_day_field = trim($_POST['birth_day_field']);
-    $birth_month_field = trim($_POST['birth_month_field']);
-    $birth_year_field = trim($_POST['birth_year_field']);
-    $birth_date_field = $birth_year_field.'-'.$birth_month_field.'-'.$birth_day_field;
-    $e_mail_field = trim($_POST['e_mail_field']);
-    $prefix_field = trim($_POST['prefix_field']);
-    $phone_number = trim($_POST['phone_number']);
-    $phone_field = $prefix_field.$phone_number;
-    
-//    $address_to_send_prize = $_POST['address_to_send_prize'];
-    $street = trim($_POST['street']);
-    $building = trim($_POST['building']);
-    $flat = trim($_POST['flat']);
-    $post_code = trim($_POST['post_code']);
-    $city_name = trim($_POST['city_name']);
-    $country = trim($_POST['country']);
-        
-    $send_button = $_POST['send_button'];
-    
-    $first_question = $_POST['pierwsze'];
-    $second_question = $_POST['drugie'];
-    $third_question = $_POST['trzecie'];
-    $forth_question = $_POST['czwarte'];
 
     $when = date('Y-m-d');
     
@@ -524,11 +493,64 @@ if(isset($_POST['send_button'])){
 //    $walidacja->walidacjaKodu($post_code, 'Post code');
     $walidacja->puste($city_name, 'City name');
     $walidacja->puste($country, 'Country');
+
+$if_zmienna_correct_request_query = "SELECT * FROM `kody` WHERE `kod`='$zmienna'";
+$if_zmienna_correct_request = $polaczenie->db->query($if_zmienna_correct_request_query);
+
+if($if_zmienna_correct_request->num_rows===1){
+
+    if(isset($_POST['send_button'])){
+
     
-    //Walidacja zaznaczonego regulaminu
-    $agreement_tick = $_POST['rules'];
-    if(!isset($_POST['rules'])){
-        $walidacja->isChecked($agreement_tick);
+        $name_field = trim($_POST['name_field']);
+        $surname_field = trim($_POST['surname_field']);
+
+        $birth_day_field = trim($_POST['birth_day_field']);
+        $birth_month_field = trim($_POST['birth_month_field']);
+        $birth_year_field = trim($_POST['birth_year_field']);
+        $birth_date_field = $birth_year_field.'-'.$birth_month_field.'-'.$birth_day_field;
+        $e_mail_field = trim($_POST['e_mail_field']);
+        $prefix_field = trim($_POST['prefix_field']);
+        $phone_number = trim($_POST['phone_number']);
+        $phone_field = $prefix_field.$phone_number;
+
+    //    $address_to_send_prize = $_POST['address_to_send_prize'];
+        $street = trim($_POST['street']);
+        $building = trim($_POST['building']);
+        $flat = trim($_POST['flat']);
+        $post_code = trim($_POST['post_code']);
+        $city_name = trim($_POST['city_name']);
+        $country = trim($_POST['country']);
+
+        $send_button = $_POST['send_button'];
+
+        $first_question = $_POST['pierwsze'];
+        $second_question = $_POST['drugie'];
+        $third_question = $_POST['trzecie'];
+        $forth_question = $_POST['czwarte'];
+
+        $when = date('Y-m-d');
+
+        //Walidacja
+        $walidacja = new Validate();
+
+        //Walidacja imienia
+        $walidacja->puste($name_field, 'Name');
+        $walidacja->maxIloscZnakow($name_field, 'Name', 25);
+        $walidacja->znakiOK($name_field, 'Name');
+
+        //Walidacja nazwiska
+        $walidacja->puste($surname_field, 'Surname');
+        $walidacja->maxIloscZnakow($surname_field, 'Surname', 40);
+        $walidacja->znakiOK($surname_field, 'Surname');
+
+
+        //Walidacja daty - niepotrzebna bo selecty w html
+
+        //Walidacja płci
+
+        if(!isset($_POST['sex_field'])){
+            $walidacja->isChecked('Sex');
         }
         
     if($walidacja->liczError==0){
