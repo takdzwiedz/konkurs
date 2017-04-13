@@ -438,6 +438,15 @@ $(function() {
 </script>
   
 <?php
+$zmienna=0;
+if(isset($_GET['zmienna'])){
+    $zmienna = $_GET['zmienna'];
+}
+
+if($zmienna==1){
+   $zmienna=0;
+$polaczenie = new DbConnect();
+
 if(isset($_POST['send_button'])){
     
     $name_field = trim($_POST['name_field']);
@@ -578,6 +587,12 @@ if(isset($_POST['send_button'])){
         }
     }    
 }
+}else
+    {
+//    header('Location:index.php?page=start');
+     header('Location:index.php?page=strona_z_kodem');
+}
+
 unset ($walidacja);
 
 ?>
