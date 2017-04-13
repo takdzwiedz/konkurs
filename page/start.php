@@ -161,7 +161,7 @@ require_once 'config/Config.php';
                                         <div class="row">
                                             <div class="form-group col-xs-6 col-md-6">
                                                 <label for="example-tel-input" class="sr-only"></label>
-                                                    <select class="form-control" id="prefix_phone" name="prefix_phone" class="input-xlarge">
+                                                    <select class="form-control" id="prefix_phone" name="prefix_field" class="input-xlarge">
                                                         <option value="" selected="selected"></option>
                                                         <option value="+48">+48</option>
                                                         <option value="+49">+49</option>
@@ -189,7 +189,7 @@ require_once 'config/Config.php';
                                     <div class="control-group">
                                         <label class="control-label"></label>
                                         <div class="controls">
-                                            <input id="street" name="street" type="text" placeholder="Street" class="input-xlarge">
+                                            <input id="street" name="street" type="text" placeholder="Street" class="input-xlarge"> *
                                         </div>
                                     </div>
 
@@ -197,7 +197,23 @@ require_once 'config/Config.php';
                                     <div class="control-group">
                                         <label class="control-label"></label>
                                         <div class="controls">
-                                            <input id="building" name="building" type="text" placeholder="Building number" class="input-xlarge">
+                                            <input id="building" name="building" type="text" placeholder="Building number" class="input-xlarge"> *
+                                            <p class="help-block"></p>
+                                        </div>
+                                    </div>
+                                    
+                                     <div class="control-group">
+                                        <label class="control-label"></label>
+                                        <div class="controls">
+                                            <input id="building" name="flat" type="text" placeholder="Flat number" class="input-xlarge">
+                                            <p class="help-block"></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label class="control-label"></label>
+                                        <div class="controls">
+                                            <input id="post_code" name="post_code" type="text" placeholder="xx-xxx" class="input-xlarge"> *
                                             <p class="help-block"></p>
                                         </div>
                                     </div>
@@ -205,7 +221,7 @@ require_once 'config/Config.php';
                                     <div class="control-group">
                                         <label class="control-label"></label>
                                         <div class="controls">
-                                            <input id="post_code" name="post_code" type="text" placeholder="Post code" class="input-xlarge">
+                                            <input id="city_name" name="city_name" type="text" placeholder="City" class="input-xlarge"> *
                                             <p class="help-block"></p>
                                         </div>
                                     </div>
@@ -213,21 +229,13 @@ require_once 'config/Config.php';
                                     <div class="control-group">
                                         <label class="control-label"></label>
                                         <div class="controls">
-                                            <input id="city_name" name="city_name" type="text" placeholder="City" class="input-xlarge">
-                                            <p class="help-block"></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label"></label>
-                                        <div class="controls">
-                                            <select id="country" name="country" class="input-xlarge">
+                                            <select id="country" name="country" class="input-xlarge"> *
                                                 <option value="">Please select a country</option>
-                                                <option value="CZ">Czechy</option>
-                                                <option value="DE">Niemcy</option>
-                                                <option value="PL">Polska</option>
-                                                <option value="SK">Słowacja</option>
-                                                <option value="FR">Francja</option>
+                                                <option value="CZ">Czech</option>
+                                                <option value="DE">Germany</option>
+                                                <option value="PL">Poland</option>
+                                                <option value="SK">Slovakia</option>
+                                                <option value="FR">France</option>
                                             </select>
                                         </div>
                                     </div>
@@ -444,8 +452,16 @@ if(isset($_POST['send_button'])){
     $phone_number = trim($_POST['phone_number']);
     $phone_field = $prefix_field.$phone_number;
     
-    $address_to_send_prize = $_POST['address_to_send_prize'];
+//    $address_to_send_prize = $_POST['address_to_send_prize'];
+    $street = trim($_POST['street']);
+    $building = trim($_POST['building']);
+    $flat = trim($_POST['flat']);
+    $post_code = trim($_POST['post_code']);
+    $city_name = trim($_POST['city_name']);
+    $country = trim($_POST['country']);
+        
     $send_button = $_POST['send_button'];
+    
     $first_question = $_POST['pierwsze'];
     $second_question = $_POST['drugie'];
     $third_question = $_POST['trzecie'];
@@ -485,18 +501,24 @@ if(isset($_POST['send_button'])){
     $walidacja->maxIloscZnakow($phone_number, 'Telephone', 12);
     
     //Walidacja adresu
-    $walidacja->puste($address_to_send_prize, 'Address');
+    
+    $walidacja->puste($street, 'Street');
+    $walidacja->puste($building, 'Building');
+    $walidacja->puste($post_code, 'Post code');
+//    $walidacja->walidacjaKodu($post_code, 'Post code');
+    $walidacja->puste($city_name, 'City name');
+    $walidacja->puste($country, 'Country');
     
     //Walidacja zaznaczonego regulaminu
-    
+    $agreement_tick = $_POST['rules'];
     if(!isset($_POST['rules'])){
-        $walidacja->isChecked('Terms');
+        $walidacja->isChecked($agreement_tick);
         }
         
     if($walidacja->liczError==0){
         
         $sex_field = $_POST['sex_field'];
-        $wstaw = "INSERT INTO `uzytkownicy`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `adress_to_send_prize`, `first_question`, `second_question`, `third_question`, `forth_question`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field','$address_to_send_prize', '$first_question', '$second_question', '$third_question', '$forth_question', '$when')";
+        $wstaw = "INSERT INTO `uzytkownicy`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
         $umiesc = $polaczenie->db->query($wstaw);
         
         $polaczenie = new DbConnect();
@@ -526,7 +548,8 @@ if(isset($_POST['send_button'])){
         $message ="Name: $name_field<br>Surname: $surname_field,<br>"
                 ."Date of Birth: $birth_date_field,<br>"
                 ."Sex: $sex_field,<br>e-mail: $e_mail_field,<br>"
-                ."Phone: $phone_field,<br>Address to send prize: $address_to_send_prize,<br>"
+                ."Phone: $phone_field,<br>"
+                ."Street: $street,<br>"
                 ."First question - Your answer: $first_question,<br>"
                 ."First question - proper answer: $odp1true,<br>"
                 ."Second question - Your answer: $second_question,<br>"
@@ -536,7 +559,6 @@ if(isset($_POST['send_button'])){
                 . "Forth question - Your answer: $forth_question,<br>"
                 . "Forth question - proper answer: $odp4true.";
         
-        debug($_POST);
         
         if($odp1==$odp1true && $odp2==$odp2true && $odp3==$odp3true && $odp4==$odp4true){
             $wyslij_maila->send($to, $subject, $message);

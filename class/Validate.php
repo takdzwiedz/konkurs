@@ -93,6 +93,13 @@ class Validate {
         }
     }
     
+    function walidacjaKodu ($ciag, $pole){
+        if(preg_match('/^([0-9]{2})(-[0-9]{3})?$/i', $ciag)){
+            $this->AddError("Please insert proper postal code into $pole");
+            $this->liczError++;
+        }
+    }
+    
     function czyCalkowita ($ciag, $pole){
         if (!filter_var($ciag, FILTER_VALIDATE_INT)) {
             $this->AddError("Plese insert digits into $pole");

@@ -136,7 +136,12 @@ if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_down' && !empty
             <td>Sex</td>
             <td>E-mail</td>
             <td>Phone No.</td>
-            <td>Address</td>
+            <td>Street</td>
+            <td>Building</td>
+            <td>Flat</td>
+            <td>Post code</td>
+            <td>City name</td>
+            <td>Country</td>
             <td>First question answer</td>
             <td>Second question answer</td>
             <td>Third question answer</td>
@@ -161,7 +166,12 @@ if(isset($_GET['action']) && $_GET['action'] == 'order_by_e_mail_down' && !empty
                         <td>$row->sex_field</td>   
                         <td>$row->e_mail_field</td>
                         <td>$row->phone_field</td>
-                        <td>$row->adress_to_send_prize</td>
+                        <td>$row->street</td>
+                        <td>$row->building</td>
+                        <td>$row->flat</td>
+                        <td>$row->post_code</td>
+                        <td>$row->city_name</td>
+                        <td>$row->country</td>
                         <td>$row->first_question</td>
                         <td>$row->second_question</td>
                         <td>$row->third_question</td>
