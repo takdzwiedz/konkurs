@@ -2,6 +2,7 @@
     
 require_once 'config/Config.php';
 require_once 'config/Switch.php';
+require_once 'lib/function.php';
 
 ?>
 <!DOCTYPE html>

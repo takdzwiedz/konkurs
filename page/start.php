@@ -3,7 +3,15 @@
 require_once 'config/Config.php';
 
 ?>
-              
+    <header>
+
+        <div class="jumbotron">
+            <h3>Contest about Warsaw</h3>
+            <img class="center" src="http://symbole.um.warszawa.pl/sites/default/files/symbole.um.warszawa.pl/ZNAK_PROMOCYJNY_FC_PL-01.jpg" alt="" style="height:200px">
+        </div>
+
+    </header>
+    
     <div id="txt" class="container-fluid front">
         <div class="row">
             <div class="col-xs-12 col-md-12"></div>
@@ -15,10 +23,7 @@ require_once 'config/Config.php';
                     <form method="post"> 
 
                         <div id="reg" class="container" class="form-group row">
-                            <h3>Contest about Warsaw</h3>
                             
-                            <img class="pull-right" src="http://symbole.um.warszawa.pl/sites/default/files/symbole.um.warszawa.pl/ZNAK_PROMOCYJNY_FC_PL-01.jpg" alt="" style="height:150px">
-
                             <div class="row">
 
                             <div id="form" class="col-sm-offset-2 col-xs-8 col-xs-offset-2 col-sm-8 col-md-8 col-sm-offset-2">
@@ -135,8 +140,11 @@ require_once 'config/Config.php';
                                     <div class="form-group row">
                                         <label for="example-url-input" class="col-2 col-form-label">Sex</label>
                                         <div class="text-center">
-                                            <input class="col-2" class="radio" class="form-control" type="radio" value="male" id="Male" name="sex_field"> Male
-                                            <input class="col-2" class="pull-right" class="radio" class="form-control" type="radio" value="female" id="Female" name="sex_field"> Female
+                                            <select id="selectbasic" name="sex_field" class="form-control">
+                                                <option value=""></option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -148,31 +156,92 @@ require_once 'config/Config.php';
                                         </div>
                                     </div>
 
-                                    <div  class="form-group row">
-                                    <label for="example-tel-input" class="col-1 col-form-label">Telephone</label>    
-                                        <label for="example-tel-input" class="form-inline"></label>
-                                        <select class="form-control" id="prefix_phone" name="prefix_field" class="input-xlarge">
-                                            <option value="" selected="selected"></option>
-                                            <option value="+48">+48</option>
-                                            <option value="+49">+49</option>
-                                            <option value="+50">+50</option>
-                                            <option value="+51">+51</option>
-                                            <option value="+52">+52</option>
-                                            <option value="+53">+53</option>
-                                        </select>
-                                        
-                                        
-                                        <input style="width: 160px" class="form-control" type="tel" value="" id="phone_field" name="phone_number">
-                                    </div>
-
-
-
                                     <div class="form-group row">
-                                        <label for="example-tel-input" class="col-2 col-form-label">Address to send prize</label>
-                                        <div class="col-10">
-                                            <input class="form-control" type="text" name="address_to_send_prize" value="" id="" placeholder="Your adress">
+                                        <label for="example-tel-input">Telephone</label>
+                                        <div class="row">
+                                            <div class="form-group col-xs-6 col-md-6">
+                                                <label for="example-tel-input" class="sr-only"></label>
+                                                    <select class="form-control" id="prefix_phone" name="prefix_field" class="input-xlarge">
+                                                        <option value="" selected="selected"></option>
+                                                        <option value="+48">+48</option>
+                                                        <option value="+49">+49</option>
+                                                        <option value="+50">+50</option>
+                                                        <option value="+51">+51</option>
+                                                        <option value="+52">+52</option>
+                                                        <option value="+53">+53</option>
+                                                    </select>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 col-md-6">
+                                                <label for="lastname" class="sr-only"></label>
+                                                <input id="lastname" class="form-control input-group-lg reg_name" type="text" name="phone_number" placeholder="Phone number" />
+                                            </div>
                                         </div>
                                     </div>
+
+                                                                <div class="form-group row">
+                                    <label for="example-tel-input" class="col-2 col-form-label">Address to send prize</label>
+                                    <!--<div class="col-10">
+                            <input class="form-control" type="text" name="address_to_send_prize" value="" id="" placeholder="Your adress">
+                        </div>-->
+
+
+                                    <div class="control-group">
+                                        <label class="control-label"></label>
+                                        <div class="controls">
+                                            <input id="street" name="street" type="text" placeholder="Street" class="input-xlarge"> *
+                                        </div>
+                                    </div>
+
+
+                                    <div class="control-group">
+                                        <label class="control-label"></label>
+                                        <div class="controls">
+                                            <input id="building" name="building" type="text" placeholder="Building number" class="input-xlarge"> *
+                                            <p class="help-block"></p>
+                                        </div>
+                                    </div>
+                                    
+                                     <div class="control-group">
+                                        <label class="control-label"></label>
+                                        <div class="controls">
+                                            <input id="building" name="flat" type="text" placeholder="Flat number" class="input-xlarge">
+                                            <p class="help-block"></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                        <label class="control-label"></label>
+                                        <div class="controls">
+                                            <input id="post_code" name="post_code" type="text" placeholder="xx-xxx" class="input-xlarge"> *
+                                            <p class="help-block"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label"></label>
+                                        <div class="controls">
+                                            <input id="city_name" name="city_name" type="text" placeholder="City" class="input-xlarge"> *
+                                            <p class="help-block"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label"></label>
+                                        <div class="controls">
+                                            <select id="country" name="country" class="input-xlarge"> *
+                                                <option value="">Please select a country</option>
+                                                <option value="CZ">Czech</option>
+                                                <option value="DE">Germany</option>
+                                                <option value="PL">Poland</option>
+                                                <option value="SK">Slovakia</option>
+                                                <option value="FR">France</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
                                 </div>
                             </div>
                         </div>
@@ -182,6 +251,8 @@ require_once 'config/Config.php';
 
         $pytanie1 = "SELECT * FROM `pytania` WHERE id_pytania=1";
         $pytanie2 = "SELECT * FROM `pytania` WHERE id_pytania=2";
+        $pytanie3 = "SELECT * FROM `pytania` WHERE id_pytania=3";
+        $pytanie4 = "SELECT * FROM `pytania` WHERE id_pytania=4";
 
         //Pytanie 1 
         $wynik = $polaczenie->db->query($pytanie1);
@@ -190,9 +261,19 @@ require_once 'config/Config.php';
         //Pytanie 2            
         $wynikk= $polaczenie->db->query($pytanie2);
         $wynikk2 = $wynikk->fetch_object();
+        
+        //Pytanie 3
+        $wynik_pyt_3 = $polaczenie->db->query($pytanie3);
+        $odp_pyt_3 = $wynik_pyt_3->fetch_object();
+        
+        //Pytanie 4
+        $wynik_pyt_4 = $polaczenie->db->query($pytanie4);
+        $odp_pyt_4 = $wynik_pyt_4->fetch_object();
+        
         ?>
 
-
+                        <!--Pytanie 1-->
+                        
                         <div id="pytanie1">
                             <div class="form-group row">
                                 <label for="example-tel-input" class="col-2 col-form-label">First question</label>
@@ -213,7 +294,9 @@ require_once 'config/Config.php';
                                 </div>
                             </div>
                         </div>
-
+                        
+                        <!--Pytanie 2-->
+                        
                         <div id="pytanie2">
                             <div class="form-group row">
                                 <label for="example-tel-input" class="col-2 col-form-label">Second question</label>
@@ -229,14 +312,64 @@ require_once 'config/Config.php';
 
                                     <select name="drugie" class="form-control">   
                                         <option value="">Choose answer</option>
-                                        <option value=" <?=$wynikk2->Odpowiedz_A; ?>"><?=$wynikk2->Odpowiedz_A; ?></option>
+                                        <option value="<?=$wynikk2->Odpowiedz_A; ?>"><?=$wynikk2->Odpowiedz_A; ?></option>
                                         <option value="<?=$wynikk2->Odpowiedz_B; ?>"><?=$wynikk2->Odpowiedz_B; ?></option>
                                         <option value="<?=$wynikk2->Odpowiedz_C; ?>"><?=$wynikk2->Odpowiedz_C; ?></option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+                        
+                        <!--Pytanie 3-->
+                        
+                        <div id="pytanie3">
+                            <div class="form-group row">
+                                <label for="example-tel-input" class="col-2 col-form-label">Third question</label>
+                                <div class="col-10">
+                                    <p>Which answer is correct. First president of Warsaw?</p>
+                                </div>
+                            </div>
 
+
+                            <div  class="form-group row">
+                                <label class="col-md-4 control-label" for="selectbasic"></label>
+                                <div class="col-md-4">
+
+                                    <select name="trzecie" class="form-control">   
+                                        <option value="">Choose answer</option>
+                                        <option value="<?=$odp_pyt_3->Odpowiedz_A; ?>"><?=$odp_pyt_3->Odpowiedz_A; ?></option>
+                                        <option value="<?=$odp_pyt_3->Odpowiedz_B; ?>"><?=$odp_pyt_3->Odpowiedz_B; ?></option>
+                                        <option value="<?=$odp_pyt_3->Odpowiedz_C; ?>"><?=$odp_pyt_3->Odpowiedz_C; ?></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Pytanie 4--> 
+                        
+                        <div id="pytanie4">
+                            <div class="form-group row">
+                                <label for="example-tel-input" class="col-2 col-form-label">Forth question</label>
+                                <div class="col-10">
+                                    <p>Which answer is correct. Actual president of Warsaw?</p>
+                                </div>
+                            </div>
+
+
+                            <div  class="form-group row">
+                                <label class="col-md-4 control-label" for="selectbasic"></label>
+                                <div class="col-md-4">
+
+                                    <select name="czwarte" class="form-control">   
+                                        <option value="">Choose answer</option>
+                                        <option value="<?=$odp_pyt_4->Odpowiedz_A; ?>"><?=$odp_pyt_4->Odpowiedz_A; ?></option>
+                                        <option value="<?=$odp_pyt_4->Odpowiedz_B; ?>"><?=$odp_pyt_4->Odpowiedz_B; ?></option>
+                                        <option value="<?=$odp_pyt_4->Odpowiedz_C; ?>"><?=$odp_pyt_4->Odpowiedz_C; ?></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="container">
                             <a href="#demo" class="btn btn-info" data-toggle="collapse">Show rules</a>
                             <div id="demo" class="collapse">
@@ -273,12 +406,12 @@ require_once 'config/Config.php';
             <div class="row">
                 <div class="stopka">
                     <div class="col-lg-10 col-lg-offset-1 text-center">
-                        <h4><b>Contact</b>
-                        </h4>
-                        <p>Telephone: +48 22 123 456 789
-                        <br>e-mail: konkurs@warszawa.pl</p>
+
+                        <a id="tel" href="phone:123-456-789">Contact</a><br>
+                        <a href="mailto:kontakt@warszawa.pl">Email Us</a>
+
                         <hr>
-                        <p><small>Copyright &copy; Urząd m.st. Warszawy 2017</small></p>
+                        <p><strong>Copyright &copy; Urząd m.st. Warszawy 2017</strong></p>
                     </div>
 
                 </div>
@@ -319,11 +452,21 @@ if(isset($_POST['send_button'])){
     $phone_number = trim($_POST['phone_number']);
     $phone_field = $prefix_field.$phone_number;
     
-    $address_to_send_prize = $_POST['address_to_send_prize'];
+//    $address_to_send_prize = $_POST['address_to_send_prize'];
+    $street = trim($_POST['street']);
+    $building = trim($_POST['building']);
+    $flat = trim($_POST['flat']);
+    $post_code = trim($_POST['post_code']);
+    $city_name = trim($_POST['city_name']);
+    $country = trim($_POST['country']);
+        
     $send_button = $_POST['send_button'];
+    
     $first_question = $_POST['pierwsze'];
     $second_question = $_POST['drugie'];
-    
+    $third_question = $_POST['trzecie'];
+    $forth_question = $_POST['czwarte'];
+
     $when = date('Y-m-d');
     
     //Walidacja
@@ -358,28 +501,44 @@ if(isset($_POST['send_button'])){
     $walidacja->maxIloscZnakow($phone_number, 'Telephone', 12);
     
     //Walidacja adresu
-    $walidacja->puste($address_to_send_prize, 'Address');
+    
+    $walidacja->puste($street, 'Street');
+    $walidacja->puste($building, 'Building');
+    $walidacja->puste($post_code, 'Post code');
+//    $walidacja->walidacjaKodu($post_code, 'Post code');
+    $walidacja->puste($city_name, 'City name');
+    $walidacja->puste($country, 'Country');
     
     //Walidacja zaznaczonego regulaminu
-    
+    $agreement_tick = $_POST['rules'];
     if(!isset($_POST['rules'])){
-        $walidacja->isChecked('Terms');
+        $walidacja->isChecked($agreement_tick);
         }
         
     if($walidacja->liczError==0){
         
         $sex_field = $_POST['sex_field'];
-        $wstaw = "INSERT INTO `uzytkownicy`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `adress_to_send_prize`, `first_question`, `second_question`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field','$address_to_send_prize', '$first_question', '$second_question','$when')";
+        $wstaw = "INSERT INTO `uzytkownicy`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
         $umiesc = $polaczenie->db->query($wstaw);
         
         $polaczenie = new DbConnect();
         $pytanie1 = "SELECT * FROM `pytania` WHERE id_pytania=1";
         $pytanie2 = "SELECT * FROM `pytania` WHERE id_pytania=2";
+        $pytanie3 = "SELECT * FROM `pytania` WHERE id_pytania=3";
+        $pytanie4 = "SELECT * FROM `pytania` WHERE id_pytania=4";
+        
+        
         $odp1=$_POST['pierwsze'];
         $odp2=$_POST['drugie'];
+        $odp3=$_POST['trzecie'];
+        $odp4=$_POST['czwarte'];
+        
+        
         $odp1true=$wynik2->Opowiedz_Poprawna;
         $odp2true=$wynikk2->Opowiedz_Poprawna;
-        
+        $odp3true=$odp_pyt_3->Opowiedz_Poprawna;
+        $odp4true=$odp_pyt_4->Opowiedz_Poprawna;
+                
         //Jeżeli użytwkownik wypełnił prawidłowo formularz i zaakceptował regulamin to jego odpowiedzi zapisują się w bazie danych i otrzymuje mejla.
         //Jeżeli odpowiedział poprawnie to otrzymuje nagodę co zostanie wyswietlone w komunikacie i w mejlu
         
@@ -389,13 +548,19 @@ if(isset($_POST['send_button'])){
         $message ="Name: $name_field<br>Surname: $surname_field,<br>"
                 ."Date of Birth: $birth_date_field,<br>"
                 ."Sex: $sex_field,<br>e-mail: $e_mail_field,<br>"
-                ."Phone: $phone_field,<br>Address to send prize: $address_to_send_prize,<br>"
+                ."Phone: $phone_field,<br>"
+                ."Street: $street,<br>"
                 ."First question - Your answer: $first_question,<br>"
                 ."First question - proper answer: $odp1true,<br>"
                 ."Second question - Your answer: $second_question,<br>"
-                ."Second question - proper answer: $odp2true.";
-                
-        if($odp1==$odp1true&&$odp2==$odp2true){
+                ."Second question - proper answer: $odp2true,<br>"
+                . "Third question - Your answer: $third_question,<br>"
+                . "Third question - proper answer: $odp3true,<br>"
+                . "Forth question - Your answer: $forth_question,<br>"
+                . "Forth question - proper answer: $odp4true.";
+        
+        
+        if($odp1==$odp1true && $odp2==$odp2true && $odp3==$odp3true && $odp4==$odp4true){
             $wyslij_maila->send($to, $subject, $message);
             echo '<span style="color:green;">You are a Winner!<br>Check Your e-mail!</span>';
                 $message.="<br><br>You won a prize!<br>"
@@ -414,4 +579,5 @@ if(isset($_POST['send_button'])){
     }    
 }
 unset ($walidacja);
+
 ?>
