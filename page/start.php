@@ -1,6 +1,7 @@
 <?php
-
+ob_start();
 require_once 'config/Config.php';
+
 
 ?>
     <header>
@@ -438,43 +439,11 @@ $(function() {
 </script>
   
 <?php
-$zmienna=0;
-if(isset($_GET['zmienna'])){
-    $zmienna = $_GET['zmienna'];
-}
 
-if($zmienna==1){
-   $zmienna=0;
 $polaczenie = new DbConnect();
 
-if(isset($_POST['send_button'])){
-    
-    $name_field = trim($_POST['name_field']);
-    $surname_field = trim($_POST['surname_field']);
+$zmienna=$_GET['zmienna'];
 
-    $birth_day_field = trim($_POST['birth_day_field']);
-    $birth_month_field = trim($_POST['birth_month_field']);
-    $birth_year_field = trim($_POST['birth_year_field']);
-    $birth_date_field = $birth_year_field.'-'.$birth_month_field.'-'.$birth_day_field;
-    $e_mail_field = trim($_POST['e_mail_field']);
-    $prefix_field = trim($_POST['prefix_field']);
-    $phone_number = trim($_POST['phone_number']);
-    $phone_field = $prefix_field.$phone_number;
-    
-//    $address_to_send_prize = $_POST['address_to_send_prize'];
-    $street = trim($_POST['street']);
-    $building = trim($_POST['building']);
-    $flat = trim($_POST['flat']);
-    $post_code = trim($_POST['post_code']);
-    $city_name = trim($_POST['city_name']);
-    $country = trim($_POST['country']);
-        
-    $send_button = $_POST['send_button'];
-    
-    $first_question = $_POST['pierwsze'];
-    $second_question = $_POST['drugie'];
-    $third_question = $_POST['trzecie'];
-    $forth_question = $_POST['czwarte'];
 
     $when = date('Y-m-d');
     
@@ -519,79 +488,156 @@ if(isset($_POST['send_button'])){
 //    $walidacja->walidacjaKodu($post_code, 'Post code');
     $walidacja->puste($city_name, 'City name');
     $walidacja->puste($country, 'Country');
+
+$if_zmienna_correct_request_query = "SELECT * FROM `kody` WHERE `kod`='$zmienna'";
+$if_zmienna_correct_request = $polaczenie->db->query($if_zmienna_correct_request_query);
+
+if($if_zmienna_correct_request->num_rows===1){
+
+    if(isset($_POST['send_button'])){
+
     
-    //Walidacja zaznaczonego regulaminu
-    $agreement_tick = $_POST['rules'];
-    if(!isset($_POST['rules'])){
-        $walidacja->isChecked($agreement_tick);
+        $name_field = trim($_POST['name_field']);
+        $surname_field = trim($_POST['surname_field']);
+
+        $birth_day_field = trim($_POST['birth_day_field']);
+        $birth_month_field = trim($_POST['birth_month_field']);
+        $birth_year_field = trim($_POST['birth_year_field']);
+        $birth_date_field = $birth_year_field.'-'.$birth_month_field.'-'.$birth_day_field;
+        $e_mail_field = trim($_POST['e_mail_field']);
+        $prefix_field = trim($_POST['prefix_field']);
+        $phone_number = trim($_POST['phone_number']);
+        $phone_field = $prefix_field.$phone_number;
+
+    //    $address_to_send_prize = $_POST['address_to_send_prize'];
+        $street = trim($_POST['street']);
+        $building = trim($_POST['building']);
+        $flat = trim($_POST['flat']);
+        $post_code = trim($_POST['post_code']);
+        $city_name = trim($_POST['city_name']);
+        $country = trim($_POST['country']);
+
+        $send_button = $_POST['send_button'];
+
+        $first_question = $_POST['pierwsze'];
+        $second_question = $_POST['drugie'];
+        $third_question = $_POST['trzecie'];
+        $forth_question = $_POST['czwarte'];
+
+        $when = date('Y-m-d');
+
+        //Walidacja
+        $walidacja = new Validate();
+
+        //Walidacja imienia
+        $walidacja->puste($name_field, 'Name');
+        $walidacja->maxIloscZnakow($name_field, 'Name', 25);
+        $walidacja->znakiOK($name_field, 'Name');
+
+        //Walidacja nazwiska
+        $walidacja->puste($surname_field, 'Surname');
+        $walidacja->maxIloscZnakow($surname_field, 'Surname', 40);
+        $walidacja->znakiOK($surname_field, 'Surname');
+
+
+        //Walidacja daty - niepotrzebna bo selecty w html
+
+        //Walidacja płci
+
+        if(!isset($_POST['sex_field'])){
+            $walidacja->isChecked('Sex');
         }
-        
-    if($walidacja->liczError==0){
-        
-        $sex_field = $_POST['sex_field'];
-        $wstaw = "INSERT INTO `uzytkownicy`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
-        $umiesc = $polaczenie->db->query($wstaw);
-        
-        $polaczenie = new DbConnect();
-        $pytanie1 = "SELECT * FROM `pytania` WHERE id_pytania=1";
-        $pytanie2 = "SELECT * FROM `pytania` WHERE id_pytania=2";
-        $pytanie3 = "SELECT * FROM `pytania` WHERE id_pytania=3";
-        $pytanie4 = "SELECT * FROM `pytania` WHERE id_pytania=4";
-        
-        
-        $odp1=$_POST['pierwsze'];
-        $odp2=$_POST['drugie'];
-        $odp3=$_POST['trzecie'];
-        $odp4=$_POST['czwarte'];
-        
-        
-        $odp1true=$wynik2->Opowiedz_Poprawna;
-        $odp2true=$wynikk2->Opowiedz_Poprawna;
-        $odp3true=$odp_pyt_3->Opowiedz_Poprawna;
-        $odp4true=$odp_pyt_4->Opowiedz_Poprawna;
-                
-        //Jeżeli użytwkownik wypełnił prawidłowo formularz i zaakceptował regulamin to jego odpowiedzi zapisują się w bazie danych i otrzymuje mejla.
-        //Jeżeli odpowiedział poprawnie to otrzymuje nagodę co zostanie wyswietlone w komunikacie i w mejlu
-        
-        $wyslij_maila = new SendMail(E_MAIL_ADMIN);
-        $subject = 'Thank You for registration in contest about Warsaw!';
-        $to = $e_mail_field ;
-        $message ="Name: $name_field<br>Surname: $surname_field,<br>"
-                ."Date of Birth: $birth_date_field,<br>"
-                ."Sex: $sex_field,<br>e-mail: $e_mail_field,<br>"
-                ."Phone: $phone_field,<br>"
-                ."Street: $street,<br>"
-                ."First question - Your answer: $first_question,<br>"
-                ."First question - proper answer: $odp1true,<br>"
-                ."Second question - Your answer: $second_question,<br>"
-                ."Second question - proper answer: $odp2true,<br>"
-                . "Third question - Your answer: $third_question,<br>"
-                . "Third question - proper answer: $odp3true,<br>"
-                . "Forth question - Your answer: $forth_question,<br>"
-                . "Forth question - proper answer: $odp4true.";
-        
-        
-        if($odp1==$odp1true && $odp2==$odp2true && $odp3==$odp3true && $odp4==$odp4true){
-            $wyslij_maila->send($to, $subject, $message);
-            echo '<span style="color:green;">You are a Winner!<br>Check Your e-mail!</span>';
-                $message.="<br><br>You won a prize!<br>"
-                        . "We will send You a gift for the address from the form.<br><br>"
-                        . "Regards,<br>"
-                        . "Contest Team";
+
+        //Weryfikacja e-maila
+        $walidacja->weryfikacjaMaila($e_mail_field, 'e-mail');
+
+        //Walidacja telefonu
+        $walidacja->puste($prefix_field, 'Prefix');
+        $walidacja->puste($phone_number, 'Phone number');
+        $walidacja->czyCalkowita($phone_number, 'Telephone');
+        $walidacja->maxIloscZnakow($phone_number, 'Telephone', 12);
+
+        //Walidacja adresu
+
+        $walidacja->puste($street, 'Street');
+        $walidacja->puste($building, 'Building');
+        $walidacja->puste($post_code, 'Post code');
+    //    $walidacja->walidacjaKodu($post_code, 'Post code');
+        $walidacja->puste($city_name, 'City name');
+        $walidacja->puste($country, 'Country');
+
+        //Walidacja zaznaczonego regulaminu
+        $agreement_tick = $_POST['rules'];
+        if(!isset($_POST['rules'])){
+            $walidacja->isChecked($agreement_tick);
+            }
+
+        if($walidacja->liczError==0){
+
+            $sex_field = $_POST['sex_field'];
+            $wstaw = "INSERT INTO `uzytkownicy`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
+            $umiesc = $polaczenie->db->query($wstaw);
+
+            $polaczenie = new DbConnect();
+            $pytanie1 = "SELECT * FROM `pytania` WHERE id_pytania=1";
+            $pytanie2 = "SELECT * FROM `pytania` WHERE id_pytania=2";
+            $pytanie3 = "SELECT * FROM `pytania` WHERE id_pytania=3";
+            $pytanie4 = "SELECT * FROM `pytania` WHERE id_pytania=4";
+
+
+            $odp1=$_POST['pierwsze'];
+            $odp2=$_POST['drugie'];
+            $odp3=$_POST['trzecie'];
+            $odp4=$_POST['czwarte'];
+
+
+            $odp1true=$wynik2->Opowiedz_Poprawna;
+            $odp2true=$wynikk2->Opowiedz_Poprawna;
+            $odp3true=$odp_pyt_3->Opowiedz_Poprawna;
+            $odp4true=$odp_pyt_4->Opowiedz_Poprawna;
+
+            //Jeżeli użytwkownik wypełnił prawidłowo formularz i zaakceptował regulamin to jego odpowiedzi zapisują się w bazie danych i otrzymuje mejla.
+            //Jeżeli odpowiedział poprawnie to otrzymuje nagodę co zostanie wyswietlone w komunikacie i w mejlu
+
+            $wyslij_maila = new SendMail(E_MAIL_ADMIN);
+            $subject = 'Thank You for registration in contest about Warsaw!';
+            $to = $e_mail_field ;
+            $message ="Name: $name_field<br>Surname: $surname_field,<br>"
+                    ."Date of Birth: $birth_date_field,<br>"
+                    ."Sex: $sex_field,<br>e-mail: $e_mail_field,<br>"
+                    ."Phone: $phone_field,<br>"
+                    ."Street: $street,<br>"
+                    ."First question - Your answer: $first_question,<br>"
+                    ."First question - proper answer: $odp1true,<br>"
+                    ."Second question - Your answer: $second_question,<br>"
+                    ."Second question - proper answer: $odp2true,<br>"
+                    . "Third question - Your answer: $third_question,<br>"
+                    . "Third question - proper answer: $odp3true,<br>"
+                    . "Forth question - Your answer: $forth_question,<br>"
+                    . "Forth question - proper answer: $odp4true.";
+
+
+            if($odp1==$odp1true && $odp2==$odp2true && $odp3==$odp3true && $odp4==$odp4true){
                 $wyslij_maila->send($to, $subject, $message);
-        }else{
-            echo '<span style="color:green;">Thank You for participating in the contest about Warsaw!<br>Check Your e-mail!</span>';
-                $message.= "<br><br>You did not won a prize this time.<br>"
-                        . "Try again later.<br><br>"
-                        . "Regards,<br>"
-                        . "Contest Team";
-                $wyslij_maila->send($to, $subject, $message);
-        }
-    }    
-}
-}else
-    {
-//    header('Location:index.php?page=start');
+                echo '<span style="color:green;">You are a Winner!<br>Check Your e-mail!</span>';
+                    $message.="<br><br>You won a prize!<br>"
+                            . "We will send You a gift for the address from the form.<br><br>"
+                            . "Regards,<br>"
+                            . "Contest Team";
+                    $wyslij_maila->send($to, $subject, $message);
+            }else{
+                echo '<span style="color:green;">Thank You for participating in the contest about Warsaw!<br>Check Your e-mail!</span>';
+                    $message.= "<br><br>You did not won a prize this time.<br>"
+                            . "Try again later.<br><br>"
+                            . "Regards,<br>"
+                            . "Contest Team";
+                    $wyslij_maila->send($to, $subject, $message);
+            }
+        }    
+    }
+
+} else {
+
      header('Location:index.php?page=strona_z_kodem');
 }
 
