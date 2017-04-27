@@ -17,7 +17,6 @@ require_once 'config/Config.php';
         <div class="row">
             <div class="col-xs-12 col-md-12"></div>
                <div class="col-xs-12 col-md-12">
-                
    
                 <!--- Begining of form --->
                 
@@ -30,10 +29,12 @@ require_once 'config/Config.php';
                             <div id="form" class="col-sm-offset-2 col-xs-8 col-xs-offset-2 col-sm-8 col-md-8 col-sm-offset-2">
 
                                 <div class="form-group row">
+                                    
                                     <label for="example-text-input" class="col-2 col-form-label">Your Name</label>
                                     <div class="col-10">
                                         <input class="form-control" type="Name" name="name_field" value="" id="example-text-input" placeholder="Name">
                                     </div>
+                                    
                                 </div>
 
 
@@ -232,11 +233,11 @@ require_once 'config/Config.php';
                                         <div class="controls">
                                             <select id="country" name="country" class="input-xlarge"> *
                                                 <option value="">Please select a country</option>
-                                                <option value="CZ">Czech</option>
-                                                <option value="DE">Germany</option>
-                                                <option value="PL">Poland</option>
-                                                <option value="SK">Slovakia</option>
-                                                <option value="FR">France</option>
+                                                <option value="Czech">Czech</option>
+                                                <option value="Germany">Germany</option>
+                                                <option value="Poland">Poland</option>
+                                                <option value="Slovakia">Slovakia</option>
+                                                <option value="France">France</option>
                                             </select>
                                         </div>
                                     </div>
@@ -442,8 +443,8 @@ $(function() {
 
 $polaczenie = new DbConnect();
 
-$zmienna=$_GET['zmienna'];
-$if_zmienna_correct_request_query = "SELECT * FROM `kody` WHERE `kod`='$zmienna'";
+$contest_code=$_GET['contest_code'];
+$if_zmienna_correct_request_query = "SELECT * FROM `kody` WHERE `kod`='$contest_code'";
 $if_zmienna_correct_request = $polaczenie->db->query($if_zmienna_correct_request_query);
 
 if($if_zmienna_correct_request->num_rows===1){
@@ -529,7 +530,7 @@ if($if_zmienna_correct_request->num_rows===1){
         if($walidacja->liczError==0){
 
             $sex_field = $_POST['sex_field'];
-            $wstaw = "INSERT INTO `uzytkownicy`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
+            $wstaw = "INSERT INTO `users`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
             $umiesc = $polaczenie->db->query($wstaw);
 
             $polaczenie = new DbConnect();

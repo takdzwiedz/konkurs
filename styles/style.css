@@ -29,3 +29,22 @@ table, td, tr  {
     margin: 0px;
     padding: 0px;
 }
+
+#carousel-example-generic{
+    margin: auto;
+    width: 45%;
+    margin-bottom: 10px;
+}
+
+.span4{
+    cursor: pointer;
+}
+
+#nag1 {
+	text-align: justify;
+}
+
+#nag2 {
+	text-align: justify;
+    margin-bottom: 10px;
+}
