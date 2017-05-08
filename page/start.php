@@ -50,231 +50,181 @@ require_once 'config/Config.php';
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-4 control-label" for="selectbasic">Day</label>
-                                    <div class="col-md-4">
+                                    <div class="col-10">
                                         <select id="birth1" name="birth_day_field" class="form-control">
-                                            <option value=""></option>
-                                            <option value="01">1</option>
-                                            <option value="02">2</option>
-                                            <option value="03">3</option>
-                                            <option value="04">4</option>
-                                            <option value="05">5</option>
-                                            <option value="06">6</option>
-                                            <option value="07">7</option>
-                                            <option value="08">8</option>
-                                            <option value="09">9</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                            <option value="13">13</option>
-                                            <option value="14">14</option>
-                                            <option value="15">15</option>
-                                            <option value="16">16</option>
-                                            <option value="17">17</option>
-                                            <option value="18">18</option>
-                                            <option value="19">19</option>
-                                            <option value="20">20</option>
-                                            <option value="21">21</option>
-                                            <option value="22">22</option>
-                                            <option value="23">23</option>
-                                            <option value="24">24</option>
-                                            <option value="25">25</option>
-                                            <option value="26">26</option>
-                                            <option value="27">27</option>
-                                            <option value="28">28</option>
-                                            <option value="29">29</option>
-                                            <option value="30">30</option>
-                                            <option value="31">31</option>
+                                            <option value="">Choose day</option>
+                                            <script>
+                                                for (var d = 1; d <=32; d++) 
+                                                {
+                                                    d = (d < 10) ? '0' + d: d;
+                                                    document.write('<option value = "' + d + '">' + d + '</option>');
+                                                }
+                                            </script>
                                         </select>
                                     </div>
                                 </div>
 
-                                    <div class="form-group row">
-                                        <label class="col-md-4 control-label" for="selectbasic">Month</label>
-                                        <div class="col-md-4">
-                                            <select id="birth2" name="birth_month_field" class="form-control">
-                                                <option value=""></option>
-                                                <option value="01">January</option>
-                                                <option value="02">February</option>
-                                                <option value="03">March</option>
-                                                <option value="04">April</option>
-                                                <option value="05">May</option>
-                                                <option value="06">June</option>
-                                                <option value="07">July</option>
-                                                <option value="08">August</option>
-                                                <option value="09">September</option>
-                                                <option value="10">October</option>
-                                                <option value="11">November</option>
-                                                <option value="12">December</option>
-                                            </select>
+                                <div class="form-group row">
+                                    <div class="col-10">
+                                        <select id="birth2" name="birth_month_field" class="form-control">
+                                            <option value="">Choose month</option>
+                                            <option value="01">January</option>
+                                            <option value="02">February</option>
+                                            <option value="03">March</option>
+                                            <option value="04">April</option>
+                                            <option value="05">May</option>
+                                            <option value="06">June</option>
+                                            <option value="07">July</option>
+                                            <option value="08">August</option>
+                                            <option value="09">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-10">
+                                        <select id="birth3" name="birth_year_field" class="form-control">
+                                            <option value="">Choose year</option>
+                                            <script>
+                                                for (y =1980; y < 2000; y++)
+                                                {
+                                                    document.write('<option value = "'+ y +'">'+ y +'</option>');
+                                                }
+                                            </script>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="example-url-input" class="col-2 col-form-label">Sex</label>
+                                    <div class="text-center">
+                                        <select id="selectbasic" name="sex_field" class="form-control">
+                                            <option value=""></option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-2 col-form-label">Your email</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="email" name="e_mail_field" value="" id="example-email-input" placeholder="example@example.com">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="example-tel-input">Telephone</label>
+                                    <div class="row">
+                                        <div class="form-group col-xs-6 col-md-6">
+                                            <label for="example-tel-input" class="sr-only"></label>
+                                                <select class="form-control" id="prefix_phone" name="prefix_field" class="input-xlarge">
+                                                    <option value="">Select prefix</option>
+                                                    <script>
+                                                        for (n=48; n<54; n++)
+                                                        {
+                                                            document.write('<option value="+'+ n +'">+'+ n +'</option>');
+                                                        }
+                                                    </script>
+                                                </select>
+                                        </div>
+
+                                        <div class="form-group col-xs-6 col-md-6">
+                                            <label for="lastname" class="sr-only"></label>
+                                            <input id="lastname" class="form-control input-group-lg reg_name" type="text" name="phone_number" placeholder="Phone number" />
                                         </div>
                                     </div>
+                                </div>
+                              
 
-                                    <div class="form-group row">
-                                        <label class="col-md-4 control-label" for="selectbasic">Year</label>
-                                        <div class="col-md-4">
-                                            <select id="birth3" name="birth_year_field" class="form-control">
-                                                <option value="0"></option>
-                                                <option value="1980">1980</option>
-                                                <option value="1981">1981</option>
-                                                <option value="1982">1982</option>
-                                                <option value="1983">1983</option>
-                                                <option value="1984">1984</option>
-                                                <option value="1985">1985</option>
-                                                <option value="1986">1986</option>
-                                                <option value="1987">1987</option>
-                                                <option value="1988">1988</option>
-                                                <option value="1989">1989</option>
-                                                <option value="1990">1990</option>
-                                                <option value="1991">1991</option>
-                                                <option value="1992">1992</option>
-                                                <option value="1993">1993</option>
-                                                <option value="1994">1994</option>
-                                                <option value="1995">1995</option>
-                                                <option value="1996">1996</option>
-                                                <option value="1997">1997</option>
-                                                <option value="1998">1998</option>
-                                                <option value="1999">1999</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="example-url-input" class="col-2 col-form-label">Sex</label>
-                                        <div class="text-center">
-                                            <select id="selectbasic" name="sex_field" class="form-control">
-                                                <option value=""></option>
-                                                <option value="male">Male</option>
-                                                <option value="female">Female</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group row">
-                                        <label for="example-email-input" class="col-2 col-form-label">Your email</label>
-                                        <div class="col-10">
-                                            <input class="form-control" type="email" name="e_mail_field" value="" id="example-email-input" placeholder="example@example.com">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="example-tel-input">Telephone</label>
-                                        <div class="row">
-                                            <div class="form-group col-xs-6 col-md-6">
-                                                <label for="example-tel-input" class="sr-only"></label>
-                                                    <select class="form-control" id="prefix_phone" name="prefix_field" class="input-xlarge">
-                                                        <option value="" selected="selected"></option>
-                                                        <option value="+48">+48</option>
-                                                        <option value="+49">+49</option>
-                                                        <option value="+50">+50</option>
-                                                        <option value="+51">+51</option>
-                                                        <option value="+52">+52</option>
-                                                        <option value="+53">+53</option>
-                                                    </select>
-                                            </div>
-
-                                            <div class="form-group col-xs-6 col-md-6">
-                                                <label for="lastname" class="sr-only"></label>
-                                                <input id="lastname" class="form-control input-group-lg reg_name" type="text" name="phone_number" placeholder="Phone number" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                                                <div class="form-group row">
-                                    <label for="example-tel-input" class="col-2 col-form-label">Address to send prize</label>
-                                    <!--<div class="col-10">
-                            <input class="form-control" type="text" name="address_to_send_prize" value="" id="" placeholder="Your adress">
-                        </div>-->
-
-
-                                    <div class="control-group">
-                                        <label class="control-label"></label>
-                                        <div class="controls">
-                                            <input id="street" name="street" type="text" placeholder="Street" class="input-xlarge"> *
-                                        </div>
-                                    </div>
-
-
-                                    <div class="control-group">
-                                        <label class="control-label"></label>
-                                        <div class="controls">
-                                            <input id="building" name="building" type="text" placeholder="Building number" class="input-xlarge"> *
-                                            <p class="help-block"></p>
-                                        </div>
+                                <div class="form-group row">
+                                    <label for="example-search-input" class="col-2 col-form-label">Address to send prize</label>
+                                </div>    
+                                
+                                <div class="form-group row">
+                                    <div class="col-10">
+                                        <input class="form-control" name="street" id="example-text-input" placeholder="Street">
                                     </div>
                                     
-                                     <div class="control-group">
-                                        <label class="control-label"></label>
-                                        <div class="controls">
-                                            <input id="building" name="flat" type="text" placeholder="Flat number" class="input-xlarge">
-                                            <p class="help-block"></p>
-                                        </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <div class="col-10">
+                                        <input id="building" name="building" type="text" placeholder="Building number" class="form-control">
+                                        <p class="help-block"></p>
                                     </div>
+                                </div>
                                     
-                                    <div class="control-group">
-                                        <label class="control-label"></label>
-                                        <div class="controls">
-                                            <input id="post_code" name="post_code" type="text" placeholder="xx-xxx" class="input-xlarge"> *
-                                            <p class="help-block"></p>
-                                        </div>
+                                <div class="form-group row">
+                                    <div class="col-10">
+                                        <input id="building" name="flat" type="text" placeholder="Flat number" class="form-control">
+                                        <p class="help-block"></p>
                                     </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label"></label>
-                                        <div class="controls">
-                                            <input id="city_name" name="city_name" type="text" placeholder="City" class="input-xlarge"> *
-                                            <p class="help-block"></p>
-                                        </div>
+                                </div>
+                                    
+                                <div class="form-group row">
+                                    <div class="col-10">
+                                        <input id="post_code" name="post_code" type="text" placeholder="xx-xxx" class="form-control">
+                                        <p class="help-block"></p>
                                     </div>
+                                </div>
 
-                                    <div class="control-group">
-                                        <label class="control-label"></label>
-                                        <div class="controls">
-                                            <select id="country" name="country" class="input-xlarge"> *
-                                                <option value="">Please select a country</option>
-                                                <option value="Czech">Czech</option>
-                                                <option value="Germany">Germany</option>
-                                                <option value="Poland">Poland</option>
-                                                <option value="Slovakia">Slovakia</option>
-                                                <option value="France">France</option>
-                                            </select>
-                                        </div>
+                                <div class="form-group row">
+                                    <div class="col-10">
+                                        <input id="city_name" name="city_name" type="text" placeholder="City" class="form-control">
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-10">
+                                        <select id="country" name="country" class="form-control">
+                                            <option value="">Please select a country</option>
+                                            <option value="Czech">Czech</option>
+                                            <option value="Germany">Germany</option>
+                                            <option value="Poland">Poland</option>
+                                            <option value="Slovakia">Slovakia</option>
+                                            <option value="France">France</option>
+                                        </select>
                                     </div>
                                 </div>
                                 
-
-                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-        <?php                  
-        $polaczenie = new DbConnect();
-
-        $pytanie1 = "SELECT * FROM `pytania` WHERE id_pytania=1";
-        $pytanie2 = "SELECT * FROM `pytania` WHERE id_pytania=2";
-        $pytanie3 = "SELECT * FROM `pytania` WHERE id_pytania=3";
-        $pytanie4 = "SELECT * FROM `pytania` WHERE id_pytania=4";
-
-        //Pytanie 1 
-        $wynik = $polaczenie->db->query($pytanie1);
-        $wynik2 = $wynik->fetch_object();
-
-        //Pytanie 2            
-        $wynikk= $polaczenie->db->query($pytanie2);
-        $wynikk2 = $wynikk->fetch_object();
+        <?php
         
-        //Pytanie 3
-        $wynik_pyt_3 = $polaczenie->db->query($pytanie3);
-        $odp_pyt_3 = $wynik_pyt_3->fetch_object();
+        $db_connection = new DbConnect();
+
+        $question_1 = "SELECT * FROM `questions` WHERE id_question=1";
+        $question_2 = "SELECT * FROM `questions` WHERE id_question=2";
+        $question_3 = "SELECT * FROM `questions` WHERE id_question=3";
+        $question_4 = "SELECT * FROM `questions` WHERE id_question=4";
+
+        //Question 1 
+        $requestToDbQuestion_1 = $db_connection->db->query($question_1);
+        $resultRequestToDbQuestion_1 = $requestToDbQuestion_1->fetch_object();
+
+        //Question 2            
+        $requestToDbQuestion_2 =  $db_connection->db->query($question_2);
+        $resultRequestToDbQuestion_2 = $requestToDbQuestion_2->fetch_object();
         
-        //Pytanie 4
-        $wynik_pyt_4 = $polaczenie->db->query($pytanie4);
-        $odp_pyt_4 = $wynik_pyt_4->fetch_object();
+        //Question 3
+        $requestToDbQuestion_3 =  $db_connection->db->query($question_3);
+        $resultRequestToDbQuestion_3 = $requestToDbQuestion_3->fetch_object();
+        
+        //Question 4
+        $requestToDbQuestion_4 =  $db_connection->db->query($question_4);
+        $resultRequestToDbQuestion_4 = $requestToDbQuestion_4->fetch_object();
         
         ?>
 
-                        <!--Pytanie 1-->
+                        <!--Question 1-->
                         
                         <div id="pytanie1">
                             <div class="form-group row">
@@ -289,15 +239,15 @@ require_once 'config/Config.php';
                                 <div class="col-md-4">
                                     <select name="pierwsze" class="form-control">
                                         <option value="">Choose answer</option>
-                                        <option value="<?=$wynik2->Odpowiedz_A; ?>"><?=$wynik2->Odpowiedz_A; ?></option>
-                                        <option value="<?=$wynik2->Odpowiedz_B; ?>"><?=$wynik2->Odpowiedz_B; ?></option>
-                                        <option value="<?=$wynik2->Odpowiedz_C; ?>"><?=$wynik2->Odpowiedz_C; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_1->Odpowiedz_A; ?>"><?=$resultRequestToDbQuestion_1->Odpowiedz_A; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_1->Odpowiedz_B; ?>"><?=$resultRequestToDbQuestion_1->Odpowiedz_B; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_1->Odpowiedz_C; ?>"><?=$resultRequestToDbQuestion_1->Odpowiedz_C; ?></option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         
-                        <!--Pytanie 2-->
+                        <!--Question 2-->
                         
                         <div id="pytanie2">
                             <div class="form-group row">
@@ -314,15 +264,15 @@ require_once 'config/Config.php';
 
                                     <select name="drugie" class="form-control">   
                                         <option value="">Choose answer</option>
-                                        <option value="<?=$wynikk2->Odpowiedz_A; ?>"><?=$wynikk2->Odpowiedz_A; ?></option>
-                                        <option value="<?=$wynikk2->Odpowiedz_B; ?>"><?=$wynikk2->Odpowiedz_B; ?></option>
-                                        <option value="<?=$wynikk2->Odpowiedz_C; ?>"><?=$wynikk2->Odpowiedz_C; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_2->Odpowiedz_A; ?>"><?=$resultRequestToDbQuestion_2->Odpowiedz_A; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_2->Odpowiedz_B; ?>"><?=$resultRequestToDbQuestion_2->Odpowiedz_B; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_2->Odpowiedz_C; ?>"><?=$resultRequestToDbQuestion_2->Odpowiedz_C; ?></option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         
-                        <!--Pytanie 3-->
+                        <!--Question 3-->
                         
                         <div id="pytanie3">
                             <div class="form-group row">
@@ -339,15 +289,15 @@ require_once 'config/Config.php';
 
                                     <select name="trzecie" class="form-control">   
                                         <option value="">Choose answer</option>
-                                        <option value="<?=$odp_pyt_3->Odpowiedz_A; ?>"><?=$odp_pyt_3->Odpowiedz_A; ?></option>
-                                        <option value="<?=$odp_pyt_3->Odpowiedz_B; ?>"><?=$odp_pyt_3->Odpowiedz_B; ?></option>
-                                        <option value="<?=$odp_pyt_3->Odpowiedz_C; ?>"><?=$odp_pyt_3->Odpowiedz_C; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_3->Odpowiedz_A; ?>"><?=$resultRequestToDbQuestion_3->Odpowiedz_A; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_3->Odpowiedz_B; ?>"><?=$resultRequestToDbQuestion_3->Odpowiedz_B; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_3->Odpowiedz_C; ?>"><?=$resultRequestToDbQuestion_3->Odpowiedz_C; ?></option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         
-                        <!--Pytanie 4--> 
+                        <!--Question 4--> 
                         
                         <div id="pytanie4">
                             <div class="form-group row">
@@ -364,9 +314,9 @@ require_once 'config/Config.php';
 
                                     <select name="czwarte" class="form-control">   
                                         <option value="">Choose answer</option>
-                                        <option value="<?=$odp_pyt_4->Odpowiedz_A; ?>"><?=$odp_pyt_4->Odpowiedz_A; ?></option>
-                                        <option value="<?=$odp_pyt_4->Odpowiedz_B; ?>"><?=$odp_pyt_4->Odpowiedz_B; ?></option>
-                                        <option value="<?=$odp_pyt_4->Odpowiedz_C; ?>"><?=$odp_pyt_4->Odpowiedz_C; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_4->Odpowiedz_A; ?>"><?=$resultRequestToDbQuestion_4->Odpowiedz_A; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_4->Odpowiedz_B; ?>"><?=$resultRequestToDbQuestion_4->Odpowiedz_B; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_4->Odpowiedz_C; ?>"><?=$resultRequestToDbQuestion_4->Odpowiedz_C; ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -422,30 +372,53 @@ require_once 'config/Config.php';
     </footer>
 
 <script>
-    
-$(function() {
-    
-    $('#pytanie2').hide();
-    $('#pytanie1').change(function() {
-        
-        if ($(this).is(":selected")) {
-            $('#pytanie2').hide();
-        } else {
-            $('#pytanie2').show();
-        }
-    });
+        $(function() {
 
-});;
-    
-</script>
+            $('#pytanie2').hide();
+            $('#pytanie1').change(function() {
+
+                if ($(this).is(":selected")) {
+                    $('#pytanie2').hide();
+                } else {
+                    $('#pytanie2').show();
+                }
+            });
+        });;
+        
+        $(function() {
+
+            $('#pytanie3').hide();
+            $('#pytanie2').change(function() {
+
+                if ($(this).is(":selected")) {
+                    $('#pytanie3').hide();
+                } else {
+                    $('#pytanie3').show();
+                }
+            });
+        });;
+        
+        $(function() {
+
+            $('#pytanie4').hide();
+            $('#pytanie3').change(function() {
+
+                if ($(this).is(":selected")) {
+                    $('#pytanie4').hide();
+                } else {
+                    $('#pytanie4').show();
+                }
+            });
+        });;
+        
+      
+    </script>
   
 <?php
 
-$polaczenie = new DbConnect();
-
 $contest_code=$_GET['contest_code'];
 $if_zmienna_correct_request_query = "SELECT * FROM `kody` WHERE `kod`='$contest_code'";
-$if_zmienna_correct_request = $polaczenie->db->query($if_zmienna_correct_request_query);
+$if_zmienna_correct_request = $db_connection->db->query($if_zmienna_correct_request_query);
 
 if($if_zmienna_correct_request->num_rows===1){
 
@@ -497,13 +470,13 @@ if($if_zmienna_correct_request->num_rows===1){
 
         //Walidacja daty - niepotrzebna bo selecty w html
 
-        //Walidacja płci
+        //Sex validation
 
         if(!isset($_POST['sex_field'])){
             $walidacja->isChecked('Sex');
         }
 
-        //Weryfikacja e-maila
+        //E-mail validation
         $walidacja->weryfikacjaMaila($e_mail_field, 'e-mail');
 
         //Walidacja telefonu
@@ -512,7 +485,7 @@ if($if_zmienna_correct_request->num_rows===1){
         $walidacja->czyCalkowita($phone_number, 'Telephone');
         $walidacja->maxIloscZnakow($phone_number, 'Telephone', 12);
 
-        //Walidacja adresu
+        //Address validation
 
         $walidacja->puste($street, 'Street');
         $walidacja->puste($building, 'Building');
@@ -521,7 +494,7 @@ if($if_zmienna_correct_request->num_rows===1){
         $walidacja->puste($city_name, 'City name');
         $walidacja->puste($country, 'Country');
 
-        //Walidacja zaznaczonego regulaminu
+        //Rules validation (id checked)
         $agreement_tick = $_POST['rules'];
         if(!isset($_POST['rules'])){
             $walidacja->isChecked($agreement_tick);
@@ -531,13 +504,7 @@ if($if_zmienna_correct_request->num_rows===1){
 
             $sex_field = $_POST['sex_field'];
             $wstaw = "INSERT INTO `users`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
-            $umiesc = $polaczenie->db->query($wstaw);
-
-            $polaczenie = new DbConnect();
-            $pytanie1 = "SELECT * FROM `pytania` WHERE id_pytania=1";
-            $pytanie2 = "SELECT * FROM `pytania` WHERE id_pytania=2";
-            $pytanie3 = "SELECT * FROM `pytania` WHERE id_pytania=3";
-            $pytanie4 = "SELECT * FROM `pytania` WHERE id_pytania=4";
+            $umiesc =  $db_connection->db->query($wstaw);
 
 
             $odp1=$_POST['pierwsze'];
@@ -546,10 +513,10 @@ if($if_zmienna_correct_request->num_rows===1){
             $odp4=$_POST['czwarte'];
 
 
-            $odp1true=$wynik2->Opowiedz_Poprawna;
-            $odp2true=$wynikk2->Opowiedz_Poprawna;
-            $odp3true=$odp_pyt_3->Opowiedz_Poprawna;
-            $odp4true=$odp_pyt_4->Opowiedz_Poprawna;
+            $odp1true=$resultRequestToDbQuestion_1->Opowiedz_Poprawna;
+            $odp2true=$resultRequestToDbQuestion_2->Opowiedz_Poprawna;
+            $odp3true=$resultRequestToDbQuestion_3->Opowiedz_Poprawna;
+            $odp4true=$resultRequestToDbQuestion_4->Opowiedz_Poprawna;
 
             //Jeżeli użytwkownik wypełnił prawidłowo formularz i zaakceptował regulamin to jego odpowiedzi zapisują się w bazie danych i otrzymuje mejla.
             //Jeżeli odpowiedział poprawnie to otrzymuje nagodę co zostanie wyswietlone w komunikacie i w mejlu
