@@ -1,7 +1,7 @@
 <?php
 
 $page = 'strona_z_kodem';
-$title = 'Konkurs';
+$title = 'Contenst about Warsaw - Welcome';
     
 if(isset($_GET['page'])){
   $page = $_GET['page'];
@@ -12,7 +12,7 @@ if(isset($_GET['page'])){
         case('start'):
 
             $page = 'start';
-            $title = 'Konkurs';
+            $title = 'Contenst about Warsaw - Questionnaire';
              break;
          case('dlaKlienta'):
 
@@ -24,14 +24,11 @@ if(isset($_GET['page'])){
             $page = 'koncowa';
             $title = 'koncowa';
              break;
-//         case('strona_z_kodem'):
-//
-//            $page = 'strona_z_kodem';
-//            $title = 'strona_z_kodem';
-//             break;
+
         default:
           
             $page = 'strona_z_kodem';
+            $title = 'Contenst about Warsaw - Welcome';
     }
     
 }

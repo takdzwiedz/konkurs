@@ -2,17 +2,8 @@
 ob_start();
 require_once 'config/Config.php';
 
-
 ?>
-    <header>
 
-        <div class="jumbotron">
-            <h3>Contest about Warsaw</h3>
-            <img class="center" src="http://symbole.um.warszawa.pl/sites/default/files/symbole.um.warszawa.pl/ZNAK_PROMOCYJNY_FC_PL-01.jpg" alt="" style="height:200px">
-        </div>
-
-    </header>
-    
     <div id="txt" class="container-fluid front">
         <div class="row">
             <div class="col-xs-12 col-md-12"></div>
@@ -239,9 +230,9 @@ require_once 'config/Config.php';
                                 <div class="col-md-4">
                                     <select name="pierwsze" class="form-control">
                                         <option value="">Choose answer</option>
-                                        <option value="<?=$resultRequestToDbQuestion_1->Odpowiedz_A; ?>"><?=$resultRequestToDbQuestion_1->Odpowiedz_A; ?></option>
-                                        <option value="<?=$resultRequestToDbQuestion_1->Odpowiedz_B; ?>"><?=$resultRequestToDbQuestion_1->Odpowiedz_B; ?></option>
-                                        <option value="<?=$resultRequestToDbQuestion_1->Odpowiedz_C; ?>"><?=$resultRequestToDbQuestion_1->Odpowiedz_C; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_1->answer_A; ?>"><?=$resultRequestToDbQuestion_1->answer_A; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_1->answer_B; ?>"><?=$resultRequestToDbQuestion_1->answer_B; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_1->answer_C; ?>"><?=$resultRequestToDbQuestion_1->answer_C; ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -264,9 +255,9 @@ require_once 'config/Config.php';
 
                                     <select name="drugie" class="form-control">   
                                         <option value="">Choose answer</option>
-                                        <option value="<?=$resultRequestToDbQuestion_2->Odpowiedz_A; ?>"><?=$resultRequestToDbQuestion_2->Odpowiedz_A; ?></option>
-                                        <option value="<?=$resultRequestToDbQuestion_2->Odpowiedz_B; ?>"><?=$resultRequestToDbQuestion_2->Odpowiedz_B; ?></option>
-                                        <option value="<?=$resultRequestToDbQuestion_2->Odpowiedz_C; ?>"><?=$resultRequestToDbQuestion_2->Odpowiedz_C; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_2->answer_A; ?>"><?=$resultRequestToDbQuestion_2->answer_A; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_2->answer_B; ?>"><?=$resultRequestToDbQuestion_2->answer_B; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_2->answer_C; ?>"><?=$resultRequestToDbQuestion_2->answer_C; ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -289,9 +280,9 @@ require_once 'config/Config.php';
 
                                     <select name="trzecie" class="form-control">   
                                         <option value="">Choose answer</option>
-                                        <option value="<?=$resultRequestToDbQuestion_3->Odpowiedz_A; ?>"><?=$resultRequestToDbQuestion_3->Odpowiedz_A; ?></option>
-                                        <option value="<?=$resultRequestToDbQuestion_3->Odpowiedz_B; ?>"><?=$resultRequestToDbQuestion_3->Odpowiedz_B; ?></option>
-                                        <option value="<?=$resultRequestToDbQuestion_3->Odpowiedz_C; ?>"><?=$resultRequestToDbQuestion_3->Odpowiedz_C; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_3->answer_A; ?>"><?=$resultRequestToDbQuestion_3->answer_A; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_3->answer_B; ?>"><?=$resultRequestToDbQuestion_3->answer_B; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_3->answer_C; ?>"><?=$resultRequestToDbQuestion_3->answer_C; ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -314,110 +305,52 @@ require_once 'config/Config.php';
 
                                     <select name="czwarte" class="form-control">   
                                         <option value="">Choose answer</option>
-                                        <option value="<?=$resultRequestToDbQuestion_4->Odpowiedz_A; ?>"><?=$resultRequestToDbQuestion_4->Odpowiedz_A; ?></option>
-                                        <option value="<?=$resultRequestToDbQuestion_4->Odpowiedz_B; ?>"><?=$resultRequestToDbQuestion_4->Odpowiedz_B; ?></option>
-                                        <option value="<?=$resultRequestToDbQuestion_4->Odpowiedz_C; ?>"><?=$resultRequestToDbQuestion_4->Odpowiedz_C; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_4->answer_A; ?>"><?=$resultRequestToDbQuestion_4->answer_A; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_4->answer_B; ?>"><?=$resultRequestToDbQuestion_4->answer_B; ?></option>
+                                        <option value="<?=$resultRequestToDbQuestion_4->answer_C; ?>"><?=$resultRequestToDbQuestion_4->answer_C; ?></option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+                    
                         
-                        <div class="container">
-                            <a href="#demo" class="btn btn-info" data-toggle="collapse">Show rules</a>
-                            <div id="demo" class="collapse">
-                                Agreement: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.
-                            </div>
+                        
+                    <div class="container">
+                        <a href="#demo" class="btn btn-info" data-toggle="collapse">Show rules</a>
+                        <div id="demo" class="collapse">
+                            Agreement: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label class="col-md-4 control-label" for="checkboxes"></label>
-                            <div class="col-md-4">
-                                <div class="checkbox">
-                                    <label for="checkboxes-0">
-                                        <input name="rules" id="checkboxes-0" value="1" type="checkbox">
+                    <div class="form-group row">
+                        <label class="col-md-4 control-label" for="checkboxes"></label>
+                        <div class="col-md-4">
+                            <div class="checkbox">
+                                <label for="checkboxes-0">
+                                    <input type="checkbox" name="rules" id="checkboxes-0" value="1"/>
                                 Accept rules
                                 </label>
-                                </div>
                             </div>
                         </div>
+                    </div>
 
                         <input class="btn btn-primary" type="submit" name="send_button" value="Wyślij">
 
                     </form>
-                
-                <!--- Begining of form --->
-                
+
                <div class="col-xs-12 col-md-12"></div>
             </div>
         </div>
     </div>
     
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="stopka">
-                    <div class="col-lg-10 col-lg-offset-1 text-center">
 
-                        <a id="tel" href="phone:123-456-789">Contact</a><br>
-                        <a href="mailto:kontakt@warszawa.pl">Email Us</a>
 
-                        <hr>
-                        <p><strong>Copyright &copy; Urząd m.st. Warszawy 2017</strong></p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </footer>
-
-<script>
-        $(function() {
-
-            $('#pytanie2').hide();
-            $('#pytanie1').change(function() {
-
-                if ($(this).is(":selected")) {
-                    $('#pytanie2').hide();
-                } else {
-                    $('#pytanie2').show();
-                }
-            });
-        });;
-        
-        $(function() {
-
-            $('#pytanie3').hide();
-            $('#pytanie2').change(function() {
-
-                if ($(this).is(":selected")) {
-                    $('#pytanie3').hide();
-                } else {
-                    $('#pytanie3').show();
-                }
-            });
-        });;
-        
-        $(function() {
-
-            $('#pytanie4').hide();
-            $('#pytanie3').change(function() {
-
-                if ($(this).is(":selected")) {
-                    $('#pytanie4').hide();
-                } else {
-                    $('#pytanie4').show();
-                }
-            });
-        });;
-        
-      
-    </script>
   
 <?php
 
 $contest_code=$_GET['contest_code'];
-$if_zmienna_correct_request_query = "SELECT * FROM `kody` WHERE `kod`='$contest_code'";
+$if_zmienna_correct_request_query = "SELECT * FROM `codes` WHERE `code`='$contest_code'";
 $if_zmienna_correct_request = $db_connection->db->query($if_zmienna_correct_request_query);
 
 if($if_zmienna_correct_request->num_rows===1){
@@ -494,11 +427,11 @@ if($if_zmienna_correct_request->num_rows===1){
         $walidacja->puste($city_name, 'City name');
         $walidacja->puste($country, 'Country');
 
-        //Rules validation (id checked)
-        $agreement_tick = $_POST['rules'];
-        if(!isset($_POST['rules'])){
-            $walidacja->isChecked($agreement_tick);
-            }
+        //Rules validation (is checked)
+        
+        if(!isset($_POST['rules']) ){
+            $walidacja->isChecked();
+        }
 
         if($walidacja->liczError==0){
 
@@ -506,40 +439,33 @@ if($if_zmienna_correct_request->num_rows===1){
             $wstaw = "INSERT INTO `users`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
             $umiesc =  $db_connection->db->query($wstaw);
 
-
-            $odp1=$_POST['pierwsze'];
-            $odp2=$_POST['drugie'];
-            $odp3=$_POST['trzecie'];
-            $odp4=$_POST['czwarte'];
-
-
-            $odp1true=$resultRequestToDbQuestion_1->Opowiedz_Poprawna;
-            $odp2true=$resultRequestToDbQuestion_2->Opowiedz_Poprawna;
-            $odp3true=$resultRequestToDbQuestion_3->Opowiedz_Poprawna;
-            $odp4true=$resultRequestToDbQuestion_4->Opowiedz_Poprawna;
+            $first_question_true = $resultRequestToDbQuestion_1->answer_true;
+            $second_question_true = $resultRequestToDbQuestion_2->answer_true;
+            $third_question_true = $resultRequestToDbQuestion_3->answer_true;
+            $forth_question_true = $resultRequestToDbQuestion_4->answer_true;
 
             //Jeżeli użytwkownik wypełnił prawidłowo formularz i zaakceptował regulamin to jego odpowiedzi zapisują się w bazie danych i otrzymuje mejla.
             //Jeżeli odpowiedział poprawnie to otrzymuje nagodę co zostanie wyswietlone w komunikacie i w mejlu
 
             $wyslij_maila = new SendMail(E_MAIL_ADMIN);
             $subject = 'Thank You for registration in contest about Warsaw!';
-            $to = $e_mail_field ;
+            $to = $e_mail_field;
             $message ="Name: $name_field<br>Surname: $surname_field,<br>"
                     ."Date of Birth: $birth_date_field,<br>"
                     ."Sex: $sex_field,<br>e-mail: $e_mail_field,<br>"
                     ."Phone: $phone_field,<br>"
                     ."Street: $street,<br>"
                     ."First question - Your answer: $first_question,<br>"
-                    ."First question - proper answer: $odp1true,<br>"
+                    ."First question - proper answer: $first_question_true,<br>"
                     ."Second question - Your answer: $second_question,<br>"
-                    ."Second question - proper answer: $odp2true,<br>"
+                    ."Second question - proper answer: $second_question_true,<br>"
                     . "Third question - Your answer: $third_question,<br>"
-                    . "Third question - proper answer: $odp3true,<br>"
+                    . "Third question - proper answer: $third_question_true,<br>"
                     . "Forth question - Your answer: $forth_question,<br>"
-                    . "Forth question - proper answer: $odp4true.";
+                    . "Forth question - proper answer: $forth_question_true.";
 
 
-            if($odp1==$odp1true && $odp2==$odp2true && $odp3==$odp3true && $odp4==$odp4true){
+            if($first_question==$first_question_true && $second_question==$second_question_true && $third_question==$third_question_true && $forth_question==$forth_question_true){
                 $wyslij_maila->send($to, $subject, $message);
                 echo '<span style="color:green;">You are a Winner!<br>Check Your e-mail!</span>';
                     $message.="<br><br>You won a prize!<br>"
@@ -547,7 +473,7 @@ if($if_zmienna_correct_request->num_rows===1){
                             . "Regards,<br>"
                             . "Contest Team";
                     $wyslij_maila->send($to, $subject, $message);
-            }else{
+            } else {
                 echo '<span style="color:green;">Thank You for participating in the contest about Warsaw!<br>Check Your e-mail!</span>';
                     $message.= "<br><br>You did not won a prize this time.<br>"
                             . "Try again later.<br><br>"

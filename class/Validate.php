@@ -119,20 +119,20 @@ class Validate {
             $this->AddError("Pole $pole musi myć mocne");
             $this->liczError++;
         }
-        
     }
     
-    function isChecked ($pole){
-            $this->AddError("Please thick $pole");
+    function isChecked (){
+            $this->AddError("Please accept rules");
             $this->liczError++;
-    
+
     }
     
     function validatetel($ciag, $pole) {
-        if(preg_match('/^(?:\(?\+?48)?(?:[-\.\(\)\s]*(\d)){9}\)?/', $ciag))
+        if(preg_match('/^(?:\(?\+?48)?(?:[-\.\(\)\s]*(\d)){9}\)?/', $ciag)){
             $this->AddError("Pole $pole należy podać w formacie +48 XXX XXX XXX");
             $this->liczError++;
         }
+    }
     
     function AddError($text){
         $this->error.=$text.'<br>';

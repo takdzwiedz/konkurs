@@ -13,6 +13,9 @@ body{
     text-align: center;
 }
 
+
+
+
 h3{
     text-align: center;
     font-size: 25px;
@@ -47,4 +50,17 @@ table, td, tr  {
 #nag2 {
 	text-align: justify;
     margin-bottom: 10px;
+}
+
+#modal {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    background-color: hsla(0,0%,0%,0.90);
+    display: none;
+    
 }
