@@ -2,7 +2,7 @@
 /*
  * autor: @takdzwiedz
  * 
- * Klasa wysyłąjaca mejle
+ * Class sending e-mails
  */
 
 
@@ -10,15 +10,15 @@ class SendMail {
             
     private $from, $Cc, $Bcc, $headers, $to, $subject, $message, $htmlCodeStart, $htmlCodeEnd;
 
-    function __construct($from, $Cc='', $Bcc='', $html='yes') {  //przypisuję domyślną wartość html
+    function __construct($from, $Cc='', $Bcc='', $html='yes') { 
 
-        //Inicjalizacja zmiennych 
+        //Variable initialization 
 
         $this->from=$from;
         $this->Cc=$Cc;
         $this->Bcc=$Bcc;
 
-        $this->headers=''; // tworzymy je, żeby się nadpisywały przypadkiem, zabezpieczamy się
+        $this->headers='';
         $this->htmlCodeStart='';
         $this->htmlCodeEnd='';
 
@@ -35,19 +35,19 @@ class SendMail {
                     </html>
                     ';          
 
-        $this->headers="MIME-Version:1.0\r\n"; //Specjalny tryb do interpretacji HTML w programach pocztowych
-        $this->headers.="Content-type:text/html; charset=UTF-8\r\n"; //Standard wymagany przez programy pocztowe
+        $this->headers="MIME-Version:1.0\r\n"; 
+        $this->headers.="Content-type:text/html; charset=UTF-8\r\n";
         }
 
         $this->headers.="From:$this->from\r\n";
 
-        // Jeżeli jest Cc to wyświetl nagłówek;
+        // Display CC if exist
 
         if($this->Cc!=''){
             $this->headers.="Cc:$this->Cc\r\n";
         }               
 
-        // Jeżeli jest Bcc to wyświetl odpowiedni nagłówek;
+        // Display BCC if exist
 
         if($this->Bcc!=''){
             $this->headers.="Bcc:$this->Bcc\r\n";
@@ -58,8 +58,7 @@ class SendMail {
     function send($to, $subject, $message){
 
         $this->to=$to;
-//                $this->Cc=$Cc;
-//                $this->Bcc=$Bcc;
+
         $this->subject=$subject;
         $this->message=$message;
 

@@ -93,7 +93,7 @@ require_once 'config/Config.php';
                                     <label for="example-url-input" class="col-2 col-form-label">Sex</label>
                                     <div class="text-center">
                                         <select id="selectbasic" name="sex_field" class="form-control">
-                                            <option value=""></option>
+                                            <option value="">Choose sex</option>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
                                         </select>
@@ -228,7 +228,7 @@ require_once 'config/Config.php';
                             <div class="form-group row">
                                 <label class="col-md-4 control-label" for="selectbasic"></label>
                                 <div class="col-md-4">
-                                    <select name="pierwsze" class="form-control">
+                                    <select name="first" class="form-control">
                                         <option value="">Choose answer</option>
                                         <option value="<?=$resultRequestToDbQuestion_1->answer_A; ?>"><?=$resultRequestToDbQuestion_1->answer_A; ?></option>
                                         <option value="<?=$resultRequestToDbQuestion_1->answer_B; ?>"><?=$resultRequestToDbQuestion_1->answer_B; ?></option>
@@ -253,7 +253,7 @@ require_once 'config/Config.php';
                                 <label class="col-md-4 control-label" for="selectbasic"></label>
                                 <div class="col-md-4">
 
-                                    <select name="drugie" class="form-control">   
+                                    <select name="second" class="form-control">   
                                         <option value="">Choose answer</option>
                                         <option value="<?=$resultRequestToDbQuestion_2->answer_A; ?>"><?=$resultRequestToDbQuestion_2->answer_A; ?></option>
                                         <option value="<?=$resultRequestToDbQuestion_2->answer_B; ?>"><?=$resultRequestToDbQuestion_2->answer_B; ?></option>
@@ -278,7 +278,7 @@ require_once 'config/Config.php';
                                 <label class="col-md-4 control-label" for="selectbasic"></label>
                                 <div class="col-md-4">
 
-                                    <select name="trzecie" class="form-control">   
+                                    <select name="third" class="form-control">   
                                         <option value="">Choose answer</option>
                                         <option value="<?=$resultRequestToDbQuestion_3->answer_A; ?>"><?=$resultRequestToDbQuestion_3->answer_A; ?></option>
                                         <option value="<?=$resultRequestToDbQuestion_3->answer_B; ?>"><?=$resultRequestToDbQuestion_3->answer_B; ?></option>
@@ -303,7 +303,7 @@ require_once 'config/Config.php';
                                 <label class="col-md-4 control-label" for="selectbasic"></label>
                                 <div class="col-md-4">
 
-                                    <select name="czwarte" class="form-control">   
+                                    <select name="forth" class="form-control">   
                                         <option value="">Choose answer</option>
                                         <option value="<?=$resultRequestToDbQuestion_4->answer_A; ?>"><?=$resultRequestToDbQuestion_4->answer_A; ?></option>
                                         <option value="<?=$resultRequestToDbQuestion_4->answer_B; ?>"><?=$resultRequestToDbQuestion_4->answer_B; ?></option>
@@ -343,109 +343,110 @@ require_once 'config/Config.php';
         </div>
     </div>
     
-
-
-
-  
 <?php
 
 $contest_code=$_GET['contest_code'];
-$if_zmienna_correct_request_query = "SELECT * FROM `codes` WHERE `code`='$contest_code'";
-$if_zmienna_correct_request = $db_connection->db->query($if_zmienna_correct_request_query);
+$if_code_correct_request_query = "SELECT * FROM `codes` WHERE `code`='$contest_code'";
+$if_code_correct_request = $db_connection->db->query($if_code_correct_request_query);
 
-if($if_zmienna_correct_request->num_rows===1){
+if($if_code_correct_request->num_rows===1){
 
     if(isset($_POST['send_button'])){
 
-    
         $name_field = trim($_POST['name_field']);
         $surname_field = trim($_POST['surname_field']);
-
         $birth_day_field = trim($_POST['birth_day_field']);
         $birth_month_field = trim($_POST['birth_month_field']);
         $birth_year_field = trim($_POST['birth_year_field']);
         $birth_date_field = $birth_year_field.'-'.$birth_month_field.'-'.$birth_day_field;
+        $sex_field = trim($_POST['sex_field']);
         $e_mail_field = trim($_POST['e_mail_field']);
         $prefix_field = trim($_POST['prefix_field']);
         $phone_number = trim($_POST['phone_number']);
         $phone_field = $prefix_field.$phone_number;
-
-    //    $address_to_send_prize = $_POST['address_to_send_prize'];
         $street = trim($_POST['street']);
         $building = trim($_POST['building']);
         $flat = trim($_POST['flat']);
         $post_code = trim($_POST['post_code']);
         $city_name = trim($_POST['city_name']);
         $country = trim($_POST['country']);
-
+        $agreement_tick = trim($_POST['country']);
         $send_button = $_POST['send_button'];
 
-        $first_question = $_POST['pierwsze'];
-        $second_question = $_POST['drugie'];
-        $third_question = $_POST['trzecie'];
-        $forth_question = $_POST['czwarte'];
+        $first_question = $_POST['first'];
+        $second_question = $_POST['second'];
+        $third_question = $_POST['third'];
+        $forth_question = $_POST['forth'];
 
         $when = date('Y-m-d');
 
-        //Walidacja
-        $walidacja = new Validate();
+        //VALIDATION
+        $validation = new Validate();
 
-        //Walidacja imienia
-        $walidacja->puste($name_field, 'Name');
-        $walidacja->maxIloscZnakow($name_field, 'Name', 25);
-        $walidacja->znakiOK($name_field, 'Name');
-
-        //Walidacja nazwiska
-        $walidacja->puste($surname_field, 'Surname');
-        $walidacja->maxIloscZnakow($surname_field, 'Surname', 40);
-        $walidacja->znakiOK($surname_field, 'Surname');
-
-
-        //Walidacja daty - niepotrzebna bo selecty w html
-
-        //Sex validation
-
-        if(!isset($_POST['sex_field'])){
-            $walidacja->isChecked('Sex');
-        }
-
-        //E-mail validation
-        $walidacja->weryfikacjaMaila($e_mail_field, 'e-mail');
-
-        //Walidacja telefonu
-        $walidacja->puste($prefix_field, 'Prefix');
-        $walidacja->puste($phone_number, 'Phone number');
-        $walidacja->czyCalkowita($phone_number, 'Telephone');
-        $walidacja->maxIloscZnakow($phone_number, 'Telephone', 12);
-
-        //Address validation
-
-        $walidacja->puste($street, 'Street');
-        $walidacja->puste($building, 'Building');
-        $walidacja->puste($post_code, 'Post code');
-    //    $walidacja->walidacjaKodu($post_code, 'Post code');
-        $walidacja->puste($city_name, 'City name');
-        $walidacja->puste($country, 'Country');
-
-        //Rules validation (is checked)
+        //Validation: name
         
-        if(!isset($_POST['rules']) ){
-            $walidacja->isChecked();
+        $validation->ifEmpty($name_field, 'Name');
+        $validation->maxAmountOfCharacters($name_field, 'Name', 25);
+        $validation->onlyLetters($name_field, 'Name');
+
+        //Validation: surname
+        
+        $validation->ifEmpty($surname_field, 'Surname');
+        $validation->maxAmountOfCharacters($surname_field, 'Surname', 40);
+        $validation->onlyLetters($surname_field, 'Surname');
+
+
+        //Validation: date - not needed because of select in the form
+
+        //Validation: sex
+
+        $validation->ifEmpty($sex_field, 'sex');
+        
+        //Validation: e-mail 
+        
+        $validation->goodEmail($e_mail_field, 'e-mail');
+
+        //Validation: phone number
+        
+        $validation->ifEmpty($prefix_field, 'Prefix');
+        $validation->ifEmpty($phone_number, 'Phone Number');
+        $validation->ifDigit($phone_number, 'Phone Number');
+        $validation->maxAmountOfCharacters($phone_number, 'Phone Number', 12);
+
+        // Validation: address
+
+        $validation->ifEmpty($street, 'Street');
+        $validation->ifEmpty($building, 'Building');
+        $validation->ifEmpty($post_code, 'Post Code');
+        $validation->ifEmpty($city_name, 'City Name');
+        $validation->ifEmpty($country, 'Country');
+
+        //Validation: questions (if answered)
+        
+        $validation->ifEmpty($first_question, '1st question');
+        $validation->ifEmpty($second_question, '2nd question');
+        $validation->ifEmpty($third_question, '3rd question');
+        $validation->ifEmpty($forth_question, '4th question');
+        
+        //Validation: rules (is checked)
+        
+        if(!isset($_POST['rules'])){
+            $validation->isChecked('Accept Rules');
         }
+        
+        
+        
+        if($validation->countErrors==0){
 
-        if($walidacja->liczError==0){
-
-            $sex_field = $_POST['sex_field'];
-            $wstaw = "INSERT INTO `users`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
-            $umiesc =  $db_connection->db->query($wstaw);
+            $insert = "INSERT INTO `users`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
+            $save =  $db_connection->db->query($insert);
 
             $first_question_true = $resultRequestToDbQuestion_1->answer_true;
             $second_question_true = $resultRequestToDbQuestion_2->answer_true;
             $third_question_true = $resultRequestToDbQuestion_3->answer_true;
             $forth_question_true = $resultRequestToDbQuestion_4->answer_true;
-
-            //Jeżeli użytwkownik wypełnił prawidłowo formularz i zaakceptował regulamin to jego odpowiedzi zapisują się w bazie danych i otrzymuje mejla.
-            //Jeżeli odpowiedział poprawnie to otrzymuje nagodę co zostanie wyswietlone w komunikacie i w mejlu
+            
+            //If user insers properly inputs, answers are saved in database and e-mail is beeing sent to user
 
             $wyslij_maila = new SendMail(E_MAIL_ADMIN);
             $subject = 'Thank You for registration in contest about Warsaw!';
@@ -465,8 +466,7 @@ if($if_zmienna_correct_request->num_rows===1){
                     . "Forth question - proper answer: $forth_question_true.";
 
 
-            if($first_question==$first_question_true && $second_question==$second_question_true && $third_question==$third_question_true && $forth_question==$forth_question_true){
-                $wyslij_maila->send($to, $subject, $message);
+            if($first_question==$first_question_true && $second_question==$second_question_true && $third_question==$third_question_true && $forth_question==$forth_question_true){                $wyslij_maila->send($to, $subject, $message);
                 echo '<span style="color:green;">You are a Winner!<br>Check Your e-mail!</span>';
                     $message.="<br><br>You won a prize!<br>"
                             . "We will send You a gift for the address from the form.<br><br>"
@@ -481,14 +481,14 @@ if($if_zmienna_correct_request->num_rows===1){
                             . "Contest Team";
                     $wyslij_maila->send($to, $subject, $message);
             }
+            header('Location:index.php?page=third');
         }    
     }
-
 } else {
 
      header('Location:index.php?page=strona_z_kodem');
 }
 
-unset ($walidacja);
+unset ($validation);
 
 ?>

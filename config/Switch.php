@@ -13,18 +13,26 @@ if(isset($_GET['page'])){
 
             $page = 'start';
             $title = 'Contenst about Warsaw - Questionnaire';
-             break;
-         case('dlaKlienta'):
+            break;
+        
+        case('dlaKlienta'):
 
             $page = 'dlaKlienta';
             $title = 'dlaKlienta';
-             break;
-         case('koncowa'):
+            break;
+        
+        case('koncowa'):
 
             $page = 'koncowa';
             $title = 'koncowa';
-             break;
-
+            break;
+        
+        case ('third'):
+            
+            $page = 'third';
+            $title = 'Contenst about Warsaw - Results';
+            break;
+                
         default:
           
             $page = 'strona_z_kodem';

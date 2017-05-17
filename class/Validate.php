@@ -3,144 +3,141 @@
 /*
  * autor: @takdzwiedz
  * 
- * Plik do walidacji danych
+ * DATA VALIDATION FILE
  * 
  */
 
 class Validate {
     
-    //Właściwość do przechowywania komunikatu o błędzie/błędach
+    //Variables keeping messages about mistakes
     
     private $error;
-    public $liczError;
+    public $countErrors;
     
     function __construct() {
         
         $this->error='';
-        $this->liczError=0;
+        $this->countErrors=0;
     }
     
-    function puste ($ciag, $pole) {
-        
-        //Najpierw są wykonywane funkcje nabliżej zeminnej.
-        //Trim obcina znaki na początku i końcu a empty sprawdza czy nie jest puste.
+    function ifEmpty ($ciag, $pole) {
         
         if (empty(trim($ciag))){
-            $this->AddError("Please insert something into $pole.");
-            $this->liczError++;
+            $this->addError("Specify $pole");
+            $this->countErrors++;
         }
         
     }
     
-    //preg_match testuje czy nie wystąpił danyc znak w ciągu
-    function znakiPL($ciag, $pole){
+    function polishCharacters($ciag, $pole){
         if(preg_match('/[ąęćłńóźż]/', $ciag)){
-            $this->AddError("Pole $pole nie może zawierać znaków polskich.");
-            $this->liczError++;
+            $this->addError("Do not use Polish characters (ąęćłńóźż) in $pole");
+            $this->countErrors++;
         }
         
     }
-    
-    //walidacja czy nie ma znakó sepcjalnych
-    //jeżeli mają nie występować to '!'
-    
-    function znakiSpecjalne($ciag, $pole){
+
+    function specialCharacters($ciag, $pole){
         
         if(preg_match('/[?!@#$%^&()_+=.,;{}\[\]*]/', $ciag)){
-            $this->AddError("Pole $pole nie może zawierać znaków specjalnych: ?!@#$%^&()_+=.,;{}[]*].");
-            $this->liczError++;
+            $this->addError("Do not use special characters ( ?!@#$%^&()_+=.,;{}[]*] )in $pole");
+            $this->countErrors++;
         }
     }
     
-    //funkcja która wymaga spełnienia warunków: tylko litery i kropka
-    //flaga 'i' oznacza, żeby nie zwracało uwagi na wielkość liter
-    
-    function znakiOK ($ciag, $pole){
+    function onlyLetters ($ciag, $pole){
         
-        //Do sprawdzenia
         if(!preg_match('/[a-z]/', $ciag)){
-            $this->AddError("Pelase insert only capital letter into $pole");
-            $this->liczError++;
+            $this->addError("Insert only letters into $pole");
+            $this->countErrors++;
         }
     }
     
-    function minIloscZnakow ($ciag,$pole,$min){
+    function minAmountOfCharacters ($ciag, $pole, $min){
         if(strlen(trim($ciag))< $min){
-            $this->AddError("Pole $pole ma mieć min $min znaków.");
-            $this->liczError++;
+            $this->addError("Minimum number of characters in $pole is $min");
+            $this->countErrors++;
         }
     }
     
-    function maxIloscZnakow ($ciag,$pole,$max){
+    function maxAmountOfCharacters ($ciag,$pole,$max){
         if(strlen(trim($ciag))> $max){
-            $this->AddError("Max amount of characters in $pole is $max.");
-            $this->liczError++;
+            $this->addError("Max amount of characters in $pole is $max.");
+            $this->countErrors++;
         }
     }
     
     
-    function takieSame ($ciag, $pole, $ciag2, $pole2){
+    function sameInputs ($ciag, $pole, $ciag2, $pole2){
         if($ciag!=$ciag2){
-            $this->AddError("Pole $pole2 ma być takie samo, jak pole $pole.");
-            $this->liczError++;
+            $this->addError("$pole2 shoud be equal to $pole");
+            $this->countErrors++;
         }
     }
     
-    function weryfikacjaMaila ($ciag, $pole){
+    function goodEmail ($ciag, $pole){
         if (!filter_var($ciag, FILTER_VALIDATE_EMAIL)) {
-            $this->AddError("Please insert propper $pole address.");
-            $this->liczError++;
+            $this->addError("Insert propper $pole address");
+            $this->countErrors++;
         }
     }
     
-    function walidacjaKodu ($ciag, $pole){
+    function goodPostalCode ($ciag, $pole){
         if(preg_match('/^([0-9]{2})(-[0-9]{3})?$/i', $ciag)){
-            $this->AddError("Please insert proper postal code into $pole");
-            $this->liczError++;
+            $this->addError("Insert proper postal code into $pole");
+            $this->countErrors++;
         }
     }
     
-    function czyCalkowita ($ciag, $pole){
+    function ifDigit ($ciag, $pole){
+        if (!ctype_digit($ciag)) {
+            $this->addError("Insert digits into $pole");
+            $this->countErrors++;
+        }
+    }
+    
+    
+    function ifIntiger ($ciag, $pole){
         if (!filter_var($ciag, FILTER_VALIDATE_INT)) {
-            $this->AddError("Plese insert digits into $pole");
-            $this->liczError++;
+            $this->addError("Insert intiger into $pole");
+            $this->countErrors++;
         }
     }
     
-    function czyZmiennoprzecinkowa ($ciag, $pole){
+    function ifFloat ($ciag, $pole){
         if (!filter_var($ciag, FILTER_VALIDATE_FLOAT)) {
-            $this->AddError("Pole $pole ma być liczbą zmiennoprzecinkową");
-            $this->liczError++;
+            $this->addError("Insert float into $pole");
+            $this->countErrors++;
         }
     }
     
-    function weryfikacjaHasla ($ciag, $pole){
+    function goodPass ($ciag, $pole){
         if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+|-]).{8,30}$/', $ciag)){
-            $this->AddError("Pole $pole musi myć mocne");
-            $this->liczError++;
+            $this->addError("Insert strong $pole between 8 and 30 charakters");
+            $this->countErrors++;
         }
     }
     
-    function isChecked (){
-            $this->AddError("Please accept rules");
-            $this->liczError++;
+    function isChecked ($pole){
+            $this->addError("$pole");
+            $this->countErrors++;
 
     }
     
-    function validatetel($ciag, $pole) {
+    function validateTel($ciag, $pole) {
         if(preg_match('/^(?:\(?\+?48)?(?:[-\.\(\)\s]*(\d)){9}\)?/', $ciag)){
-            $this->AddError("Pole $pole należy podać w formacie +48 XXX XXX XXX");
-            $this->liczError++;
+            $this->addError("Insert digits in that way into +48 XXX XXX XXX $pole");
+            $this->countErrors++;
         }
     }
     
-    function AddError($text){
+    function addError($text){
         $this->error.=$text.'<br>';
     }
     
     function __destruct(){
         if(!empty($this->error)){
-            echo '<div class="error" style="color:red;">'.$this->error.'</div>';
+            echo '<div class="error" style="color:red;">Please: <br>'.$this->error.'</div>';
         }
     }
     
