@@ -1,5 +1,6 @@
 <?php
 ob_start();
+session_start();
 require_once 'config/Config.php';
 
 ?>
@@ -434,13 +435,13 @@ if($if_code_correct_request->num_rows===1){
             $validation->isChecked('Accept Rules');
         }
         
-        
-        
         if($validation->countErrors==0){
-
+            
+            //Inserting new user
+            
             $insert = "INSERT INTO `users`(`id_user`, `name_field`, `surname_field`, `birth_date_field`, `sex_field`, `e_mail_field`, `phone_field`, `street`, `building`, `flat`, `post_code`, `city_name`, `country`, `first_question`, `second_question`, `third_question`, `forth_question`, `agreement_tick`, `date`) VALUES ('', '$name_field','$surname_field','$birth_date_field','$sex_field','$e_mail_field','$phone_field', '$street', '$building', '$flat', '$post_code', '$city_name', '$country','$first_question', '$second_question', '$third_question', '$forth_question', '$agreement_tick','$when')";
             $save =  $db_connection->db->query($insert);
-
+            
             $first_question_true = $resultRequestToDbQuestion_1->answer_true;
             $second_question_true = $resultRequestToDbQuestion_2->answer_true;
             $third_question_true = $resultRequestToDbQuestion_3->answer_true;
@@ -465,7 +466,7 @@ if($if_code_correct_request->num_rows===1){
                     . "Forth question - Your answer: $forth_question,<br>"
                     . "Forth question - proper answer: $forth_question_true.";
 
-
+            
             if($first_question==$first_question_true && $second_question==$second_question_true && $third_question==$third_question_true && $forth_question==$forth_question_true){                $wyslij_maila->send($to, $subject, $message);
                 echo '<span style="color:green;">You are a Winner!<br>Check Your e-mail!</span>';
                     $message.="<br><br>You won a prize!<br>"
@@ -481,12 +482,20 @@ if($if_code_correct_request->num_rows===1){
                             . "Contest Team";
                     $wyslij_maila->send($to, $subject, $message);
             }
+            
+            $_SESSION['zm_sesji'] = $message;
             header('Location:index.php?page=third');
+            
+            // Code deactivation
+            
+            $deactivation_request = "UPDATE `codes` SET `active`= 0 WHERE `code` = '$contest_code'";
+            $deactivate = $db_connection->db->query($deactivation_request);
+            
         }    
     }
 } else {
 
-     header('Location:index.php?page=strona_z_kodem');
+     header('Location:index.php?page=first');
 }
 
 unset ($validation);

@@ -1,6 +1,6 @@
 <?php
 
-$page = 'strona_z_kodem';
+$page = 'first';
 $title = 'Contenst about Warsaw - Welcome';
     
 if(isset($_GET['page'])){
@@ -9,9 +9,9 @@ if(isset($_GET['page'])){
 
     switch ($page){
 
-        case('start'):
+        case('second'):
 
-            $page = 'start';
+            $page = 'second';
             $title = 'Contenst about Warsaw - Questionnaire';
             break;
         
@@ -35,7 +35,7 @@ if(isset($_GET['page'])){
                 
         default:
           
-            $page = 'strona_z_kodem';
+            $page = 'first';
             $title = 'Contenst about Warsaw - Welcome';
     }
     

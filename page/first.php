@@ -4,14 +4,20 @@ $dbconnect = new DbConnect();
 
 if(isset($_POST['button_code'])){
 
-    $contest_code=$_POST['contest_code'];
+    $contest_code = trim($_POST['contest_code']);
     $check_code = "SELECT * FROM `codes` WHERE `code`='$contest_code'";
     $result = $dbconnect->db->query($check_code);
-    var_dump($result);
-    if($result->num_rows!=0){
-        header("Location:index.php?page=start&contest_code=$contest_code");
+    $another = $result->fetch_object();
+    
+//    var_dump($another->active);
+//    die();
+    
+    if($result->num_rows!=0 && $another->active == 1){
+        header("Location:index.php?page=second&contest_code=$contest_code");
+    } elseif ($result->num_rows!==0 && $another->active == 0){
+        echo '<span class="error">Your code is already used.</span>';
     } else {
-        echo '<span class="error">Wrong code!</span>';
+        echo '<span class="error">Wrong code.</span>';
     }   
 }
 
