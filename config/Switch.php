@@ -15,24 +15,25 @@ if(isset($_GET['page'])){
             $title = 'Contenst about Warsaw - Questionnaire';
             break;
         
-        case('dlaKlienta'):
-
-            $page = 'dlaKlienta';
-            $title = 'dlaKlienta';
-            break;
-        
-        case('koncowa'):
-
-            $page = 'koncowa';
-            $title = 'koncowa';
-            break;
-        
         case ('third'):
             
             $page = 'third';
             $title = 'Contenst about Warsaw - Results';
             break;
-                
+                   
+        case('users'):
+
+            $page = 'users';
+            $title = 'Users';
+            break;
+ 
+        case('login'):
+
+            $page = 'login';
+            $title = 'Login';
+            break;
+        
+        
         default:
           
             $page = 'first';

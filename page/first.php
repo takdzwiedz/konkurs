@@ -2,30 +2,43 @@
 
 $dbconnect = new DbConnect();
 
-if(isset($_POST['button_code'])){
-
-    $contest_code = trim($_POST['contest_code']);
-    $check_code = "SELECT * FROM `codes` WHERE `code`='$contest_code'";
-    $result = $dbconnect->db->query($check_code);
-    $another = $result->fetch_object();
-    
-//    var_dump($another->active);
-//    die();
-    
-    if($result->num_rows!=0 && $another->active == 1){
-        header("Location:index.php?page=second&contest_code=$contest_code");
-    } elseif ($result->num_rows!==0 && $another->active == 0){
-        echo '<span class="error">Your code is already used.</span>';
-    } else {
-        echo '<span class="error">Wrong code.</span>';
-    }   
-}
-
 ?>
 
     <div id="nag1" class="container">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dicta dolor aliquam, inventore saepe nulla ipsum molestiae similique, in velit, quisquam rerum necessitatibus quae reiciendis voluptatum nisi quaerat. Aliquid vero labore, itaque ullam voluptas. Dicta, atque. Error illo numquam, velit dolor saepe autem, vitae pariatur, eligendi veritatis, delectus eius ullam. Alias eos doloribus, dignissimos iste? Voluptatibus similique obcaecati enim quaerat voluptatem esse molestias itaque, totam odio quia, maiores, sint! Minima autem perspiciatis enim, suscipit dolor ex libero distinctio soluta! Suscipit tempore laudantium sapiente, eveniet cum. Facilis quis minima omnis, odio atque laborum necessitatibus enim! Quas dolore aliquam, veniam voluptas dicta fugiat! Eius iste similique ipsum. Quo beatae repellat laborum, voluptatibus ipsam aliquam, fugit minima cumque voluptatem molestias natus quod, eos at. Fugiat commodi excepturi incidunt suscipit quidem iste cumque nostrum quaerat expedita esse odio voluptate nisi culpa quis accusamus eaque architecto nesciunt deserunt mollitia, natus nam consequatur dolorum id! Laboriosam officiis, quos et cum voluptatem molestiae harum reprehenderit illum totam iure, voluptate, ipsam ea impedit dolore magni porro illo architecto repellat suscipit labore expedita quibusdam. Aperiam dolore dicta illum ducimus reiciendis quisquam, omnis quae obcaecati sint, fugit excepturi quibusdam nisi dignissimos tenetur harum tempora, asperiores molestiae, soluta vel natus cupiditate!</p>
     </div><br>
+    
+    <div class="container">
+    <?php
+
+    if(isset($_POST['button_code'])){
+
+        $contest_code = trim($_POST['contest_code']);
+        $check_code = "SELECT * FROM `codes` WHERE `code`='$contest_code'";
+        $result = $dbconnect->db->query($check_code);
+        $another = $result->fetch_object();
+
+    //    var_dump($another->active);
+    //    die();
+
+        if($result->num_rows!=0 && $another->active == 1){
+     
+            header("Location:index.php?page=second&contest_code=$contest_code");
+        } elseif ($result->num_rows!==0 && $another->active == 0){
+            echo '  <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                        <strong>Your code is already used!</strong>
+                    </div>';
+        } else {
+            echo '  <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                        <strong>Wrong code!</strong>
+                    </div>';
+
+        } 
+    }
+    ?>
+    </div>
     
     <!--Form -->
     

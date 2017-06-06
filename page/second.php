@@ -483,8 +483,8 @@ if($if_code_correct_request->num_rows===1){
                     $wyslij_maila->send($to, $subject, $message);
             }
             
-            $_SESSION['zm_sesji'] = $message;
-            header('Location:index.php?page=third');
+            $_SESSION['message'] = $message;
+            header("Location:index.php?page=third&contest_code=$contest_code");
             
             // Code deactivation
             

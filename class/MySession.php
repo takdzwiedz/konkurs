@@ -3,40 +3,33 @@
 class MySession {
     
     function __construct() {
+        
         session_start();
+        
     }
     
     function sessStart($login, $haslo){
         
         $polacz = new DbConnect();
-        
-        $zapytanie = "SELECT `id_user`, `login`, `aktywne`  FROM `users` WHERE `login` = '$login' AND `password` = '$haslo' AND `aktywne`= 1";
+        $zapytanie = "SELECT * FROM `admin` WHERE `login` = '$login' AND `haslo` = '$haslo'";
         $wynik = $polacz->db->query($zapytanie);
-        $wynik2 = $wynik->fetch_object(); //fetch objectpomaga dobrać się do ...
-
+        $wynik2 = $wynik->fetch_object();
+              
         if ($wynik->num_rows==1){
-            
-            if (isset($_POST['zapamietaj'])&& $_POST['zapamietaj']=='tak'){
-            
-            setcookie('login', $login, time()+(60*60*24*7));
-            } else {
-                setcookie('login', $login, time()-120);
-            }
-            
-            // Do zmiennej globalnej, która jest tablicą mogę przypisać co chcę
-            
+                                   
             $_SESSION['identyfikator_sesji'] = session_id();
-            $_SESSION['id_user'] = $wynik2->id_user;
+            $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
             $_SESSION['login'] = $wynik2->login; //Bezpieczeniej jest pobrać login z bazy danych
             $_SESSION['klient'] = $_SERVER['HTTP_USER_AGENT'];
-            $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+            $_SESSION['id_admin'] = $wynik2->id_admin;
+
             
-            header('Location:indexlog.php');
+            header('Location:index.php?page=users');
             exit();
             
         } else {
             
-            header('Location:index.php?logowanie=no');
+            header('Location:index.php?page=login');
             
             exit();
         }
@@ -45,7 +38,7 @@ class MySession {
     
     function sessVer () {
         
-        if(!isset($_SESSION['id_user']) 
+        if(!isset($_SESSION['id_admin']) 
         || $_SESSION['identyfikator_sesji'] != session_id() 
         || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']
         || $_SESSION['klient'] != $_SERVER['HTTP_USER_AGENT'])
@@ -61,7 +54,7 @@ class MySession {
         $_SESSION[] = array();
         session_regenerate_id(); //Tak bezpieczniej. Gdyby było na początku sesji, to przy każdym "cofnij" tworzyłoby nową sesję.
         session_destroy();
-        header('Location:index.php');
+        header('Location:index.php?page=login');
         exit();
         }
 

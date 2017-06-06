@@ -1,11 +1,8 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
 <?php
-require_once '../config/Config.php';
-require_once '../class/DbConnect.php';
-require_once '../class/SendMail.php';
+
+$sess = new MySession();
+$sess->sessVer();
+
 $connection = new DbConnect();
 
 $request = "SELECT * FROM `users`";
@@ -126,6 +123,11 @@ if(isset($_GET['action']) && $_GET['action'] == 'order_by_country_name_down' && 
     $order_by_country_name= 'up';
     $request .= " ORDER BY `country` DESC";
 }
+
+if (isset ($_GET['action']) && $_GET['action'] == 'logout' && !empty($_GET['action'])) {
+     
+    $sess->sessEnd();
+}
 ?>
 
 <!--- Filtering dropdown buttons --->
@@ -166,6 +168,7 @@ Filter by question
 <!--- Clear filtering and sorting buttons --->
 
 <a href="?page=users"><button type="button" class="btn btn-primary dropdown-toggle">Clear Filtering And Ordering</button></a>
+<a href="?page=users&action=logout"><button type="button" class="btn btn-default">Log out</button></a>
 
 <!---  Table structure --->
 
