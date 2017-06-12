@@ -131,6 +131,19 @@ class Validate {
         }
     }
     
+    function ifExist ($ciag, $pole)  {
+        
+        $request = "SELECT `id_user` FROM `users` WHERE `e_mail_field`='$ciag'";
+        $db = new DbConnect();
+        $result = $db->db->query($request);
+        
+        if($result->num_rows >=1 ){
+            $this->addError("change $pole - this one already exists");
+            $this->countErrors++;
+        }
+    }
+
+    
     function addError($text){
         $this->error.=$text.'<br>';
     }

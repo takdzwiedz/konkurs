@@ -104,7 +104,7 @@ require_once 'config/Config.php';
                                 <div class="form-group row">
                                     <label for="example-email-input" class="col-2 col-form-label">Your email</label>
                                     <div class="col-10">
-                                        <input class="form-control" type="email" name="e_mail_field" value="" id="example-email-input" placeholder="example@example.com">
+                                        <input class="form-control" type="email" name="e_mail_field" value="" id="example-email-input" placeholder="example@example.com"><span id="mailSpan"></span><br>
                                     </div>
                                 </div>
 
@@ -406,6 +406,8 @@ if($if_code_correct_request->num_rows===1){
         //Validation: e-mail 
         
         $validation->goodEmail($e_mail_field, 'e-mail');
+        $validation->ifExist($e_mail_field, 'e-mail');
+        
 
         //Validation: phone number
         

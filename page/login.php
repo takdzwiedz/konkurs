@@ -28,7 +28,7 @@
 
             ?>
         
-                <input name="login" id="login" class="form-control" placeholder="Login"><br>
+                <input name="login" id="login" class="form-control" placeholder="Login"><span id="loginSpan"></span><br>
                 <input type="password" id="haslo" name="haslo" class="form-control" placeholder="Hasło"><br>
 
                 <input type="submit" id="zaloguj" name="zaloguj" value="Logowanie" class="btn btn-lg btn-primary btn-block"> 

@@ -24,7 +24,7 @@ require_once 'lib/function.php';
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="scripts/question_display.js"></script>
-        <script src="scripts/error_dispaly.js"></script>
+        <script src="scripts/main.js"></script>
         <link rel="stylesheet" href="styles/style.css">
         <title><?php echo $title; ?></title>
         

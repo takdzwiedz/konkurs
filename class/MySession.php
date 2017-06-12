@@ -19,7 +19,7 @@ class MySession {
                                    
             $_SESSION['identyfikator_sesji'] = session_id();
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
-            $_SESSION['login'] = $wynik2->login; //Bezpieczeniej jest pobrać login z bazy danych
+            $_SESSION['login'] = $wynik2->login;
             $_SESSION['klient'] = $_SERVER['HTTP_USER_AGENT'];
             $_SESSION['id_admin'] = $wynik2->id_admin;
 
@@ -52,7 +52,7 @@ class MySession {
     function sessEnd () {
 
         $_SESSION[] = array();
-        session_regenerate_id(); //Tak bezpieczniej. Gdyby było na początku sesji, to przy każdym "cofnij" tworzyłoby nową sesję.
+        session_regenerate_id(); 
         session_destroy();
         header('Location:index.php?page=login');
         exit();
