@@ -33,6 +33,17 @@ if(isset($_GET['page'])){
             $title = 'Login';
             break;
         
+        case('remind'):
+
+            $page = 'remind';
+            $title = 'Remind password';
+            break;
+        
+        case('recovery'):
+
+            $page = 'recovery';
+            $title = 'Password recovery';
+            break;
         
         default:
           

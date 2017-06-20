@@ -10,18 +10,18 @@ class MySession {
     
     function sessStart($login, $haslo){
         
-        $polacz = new DbConnect();
-        $zapytanie = "SELECT * FROM `admin` WHERE `login` = '$login' AND `haslo` = '$haslo'";
-        $wynik = $polacz->db->query($zapytanie);
-        $wynik2 = $wynik->fetch_object();
+        $connect = new DbConnect();
+        $request = "SELECT * FROM `admin` WHERE `login` = '$login' AND `haslo` = '$haslo'";
+        $result = $connect->db->query($request);
+        $catch = $result->fetch_object();
               
-        if ($wynik->num_rows==1){
+        if ($result->num_rows==1){
                                    
-            $_SESSION['identyfikator_sesji'] = session_id();
+            $_SESSION['session_id'] = session_id();
             $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
-            $_SESSION['login'] = $wynik2->login;
-            $_SESSION['klient'] = $_SERVER['HTTP_USER_AGENT'];
-            $_SESSION['id_admin'] = $wynik2->id_admin;
+            $_SESSION['login'] = $catch->login;
+            $_SESSION['client'] = $_SERVER['HTTP_USER_AGENT'];
+            $_SESSION['id_admin'] = $catch->id_admin;
 
             
             header('Location:index.php?page=users');
@@ -39,9 +39,9 @@ class MySession {
     function sessVer () {
         
         if(!isset($_SESSION['id_admin']) 
-        || $_SESSION['identyfikator_sesji'] != session_id() 
+        || $_SESSION['session_id'] != session_id() 
         || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']
-        || $_SESSION['klient'] != $_SERVER['HTTP_USER_AGENT'])
+        || $_SESSION['client'] != $_SERVER['HTTP_USER_AGENT'])
         {
         header('Location:index.php');
         exit();
