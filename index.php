@@ -8,9 +8,7 @@ require_once 'lib/function.php';
 <!DOCTYPE html>
 
 <html>
-    
     <head>
-        
         <meta charset="UTF-8">
         <link href="signin.css" rel="stylesheet">
         <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,25 +25,21 @@ require_once 'lib/function.php';
         <script src="scripts/main.js"></script>
         <link rel="stylesheet" href="styles/style.css">
         <title><?php echo $title; ?></title>
-        
     </head>
     
     <body>
         <header>
-
             <div class="jumbotron">
                 <h3>Contest about Warsaw</h3>
                 <img class="center" src="http://symbole.um.warszawa.pl/sites/default/files/symbole.um.warszawa.pl/ZNAK_PROMOCYJNY_FC_PL-01.jpg" alt="" style="height:200px">
             </div>
-
         </header>
         
         <?php
         require_once "page/$page.php";
         ?>
         
-        <footer>
-            
+        <footer> 
         <div class="container">
             <div id="kontakt" class="row">
                 <div class="span4 proj-div" data-toggle="modal" data-target="#GSCCModal" style="cursor:pointer">Contact</div>

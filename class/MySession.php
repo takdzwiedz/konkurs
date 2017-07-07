@@ -2,10 +2,8 @@
 
 class MySession {
     
-    function __construct() {
-        
+    function __construct() { 
         session_start();
-        
     }
     
     function sessStart($login, $haslo){
@@ -23,14 +21,12 @@ class MySession {
             $_SESSION['client'] = $_SERVER['HTTP_USER_AGENT'];
             $_SESSION['id_admin'] = $catch->id_admin;
 
-            
             header('Location:index.php?page=users');
             exit();
             
         } else {
             
             header('Location:index.php?page=login');
-            
             exit();
         }
         

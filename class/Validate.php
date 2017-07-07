@@ -113,7 +113,7 @@ class Validate {
     
     function goodPass ($ciag, $pole){
         if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+|-]).{8,30}$/', $ciag)){
-            $this->addError("Insert strong $pole between 8 and 30 charakters");
+            $this->addError("Insert strong $pole between 8 and 30 characters including letters digits and special characters");
             $this->countErrors++;
         }
     }

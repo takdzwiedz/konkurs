@@ -131,31 +131,31 @@ if (isset ($_GET['action']) && $_GET['action'] == 'logout' && !empty($_GET['acti
 ?>
 
 <!--- Filtering dropdown buttons --->
+<div class="malina">
+    <div class="btn-group">
+      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+     Filter by sex <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="?page=users&action=filter_by_sex_f"><button type="button" class="btn btn-success dropdown-toggle">Female</button></a></li>
+        <li><a href="?page=users&action=filter_by_sex_m"><button type="button" class="btn btn-success dropdown-toggle">Male</button></a></li>
+      </ul>
+    </div>
 
-<div class="btn-group">
-  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- Filter by sex <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="?page=users&action=filter_by_sex_f"><button type="button" class="btn btn-success dropdown-toggle">Female</button></a></li>
-    <li><a href="?page=users&action=filter_by_sex_m"><button type="button" class="btn btn-success dropdown-toggle">Male</button></a></li>
-  </ul>
-</div>
-
-<div class="btn-group">
-  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Filter by question
-  <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="?page=users&action=filter_by_good_first_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good 1st Answer</button></a></li>
-    <li><a href="?page=users&action=filter_by_good_second_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good 2nd Answer</button></a></li>
-    <li><a href="?page=users&action=filter_by_good_third_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good 3rd Answer</button></a></li>
-    <li><a href="?page=users&action=filter_by_good_forth_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good 4th Answer</button></a></li>
-    <li><a href="?page=users&action=filter_by_good_all_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good All Answer</button></a></li>
-    <li>
-  </ul>
-</div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter by question
+      <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="?page=users&action=filter_by_good_first_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good 1st Answer</button></a></li>
+        <li><a href="?page=users&action=filter_by_good_second_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good 2nd Answer</button></a></li>
+        <li><a href="?page=users&action=filter_by_good_third_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good 3rd Answer</button></a></li>
+        <li><a href="?page=users&action=filter_by_good_forth_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good 4th Answer</button></a></li>
+        <li><a href="?page=users&action=filter_by_good_all_question"><button type="button" class="btn btn-success dropdown-toggle">Filter by good Good All Answer</button></a></li>
+        <li>
+      </ul>
+    </div>
 
 <!--- Sorting buttons --->
 
@@ -169,13 +169,16 @@ Filter by question
 
 <a href="?page=users"><button type="button" class="btn btn-primary dropdown-toggle">Clear Filtering And Ordering</button></a>
 <a href="?page=users&action=logout"><button type="button" class="btn btn-default">Log out</button></a>
-
+</div>
 <!---  Table structure --->
 
-<table class="table table-striped" style="border:1px solid black"> 
-    <thead class="table table-striped">
+
+
+<table class="table table-bordered table-striped"> 
+    <thead>
+        
         <tr>
-            <td>Lp.</td>
+            <th>#</th>
             <td>Name</td>
             <td>Surname</td>
             <td>Birth date</td>
@@ -194,7 +197,8 @@ Filter by question
             <td>Forth question answer</td>
             <td>Date of registration</td>
         </tr>
-       
+    </thead>
+    <tbody>   
 <?php
 
 // Displaying users
@@ -205,7 +209,7 @@ while($row = $result->fetch_object()){
     $lp++;
     echo " 
         <tr>
-            <td>$lp</td>
+            <th scope=\"row\">$lp</th>
             <td>$row->name_field</td>
             <td>$row->surname_field</td>
             <td>$row->birth_date_field</td>
@@ -224,10 +228,11 @@ while($row = $result->fetch_object()){
             <td>$row->forth_question</td>
             <td>$row->date</td>
         </tr>
+        
         ";
 }
 // End of displaying users
 ?>
-            
-    </thead>
+           
+    </tbody> 
 </table>

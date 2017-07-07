@@ -26,11 +26,14 @@ footer {
     margin-top: 10px;
     background-color: #eee;
 }
+
+table {
     
-table, td, tr  {
-    border: 1px solid black;
-    margin: 0px;
-    padding: 0px;
+    font-size: 0.8em;
+}
+
+thead  {
+    font-weight: bold; 
 }
 
 #carousel-example-generic{
@@ -68,5 +71,12 @@ table, td, tr  {
 #kontakt {
     
     margin: 20px;
+    
+}
+
+.malina {
+    
+    padding: 10px;
+    margin: 10px;
     
 }
