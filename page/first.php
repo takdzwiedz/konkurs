@@ -1,14 +1,37 @@
 <?php
 
 $dbconnect = new DbConnect();
+$request = "SELECT `code`, `active` FROM `codes`";
+$result = $dbconnect->db->query($request);
 
 ?>
 
     <div id="nag1" class="container">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dicta dolor aliquam, inventore saepe nulla ipsum molestiae similique, in velit, quisquam rerum necessitatibus quae reiciendis voluptatum nisi quaerat. Aliquid vero labore, itaque ullam voluptas. Dicta, atque. Error illo numquam, velit dolor saepe autem, vitae pariatur, eligendi veritatis, delectus eius ullam. Alias eos doloribus, dignissimos iste? Voluptatibus similique obcaecati enim quaerat voluptatem esse molestias itaque, totam odio quia, maiores, sint! Minima autem perspiciatis enim, suscipit dolor ex libero distinctio soluta! Suscipit tempore laudantium sapiente, eveniet cum. Facilis quis minima omnis, odio atque laborum necessitatibus enim! Quas dolore aliquam, veniam voluptas dicta fugiat! Eius iste similique ipsum. Quo beatae repellat laborum, voluptatibus ipsam aliquam, fugit minima cumque voluptatem molestias natus quod, eos at. Fugiat commodi excepturi incidunt suscipit quidem iste cumque nostrum quaerat expedita esse odio voluptate nisi culpa quis accusamus eaque architecto nesciunt deserunt mollitia, natus nam consequatur dolorum id! Laboriosam officiis, quos et cum voluptatem molestiae harum reprehenderit illum totam iure, voluptate, ipsam ea impedit dolore magni porro illo architecto repellat suscipit labore expedita quibusdam. Aperiam dolore dicta illum ducimus reiciendis quisquam, omnis quae obcaecati sint, fugit excepturi quibusdam nisi dignissimos tenetur harum tempora, asperiores molestiae, soluta vel natus cupiditate!</p>
+    <p>
+        This is the training application “Contest for Warsaw”. It has fictional customer - the city of Warsaw. 
+        Its purpose is to provide on-line contest for citizens. Application has three pages for users (citizens): 
+        Welcome, Questionnaire and Summary. Only citizens having special 10-character alphanumeric code, can take 
+        part in the contest. Otherwise they can not leave first page.
+        On the second page all contact data are gathered from users in different type of inputs. 
+        All data are validated. After that citizen is answering 4 questions. Second question appears after 
+        answering first one, third after answering second etc. There are also rules and contact info. 
+        After filling all blanks and answering all questions user is directed to the third page displaying 
+        all data he put including right answers. The same data is being sent to user via e-mail provided in the form.
+        <br>
+        <br>Link to application: <a href="http://tu-i-teraz.com.pl/contest/">http://tu-i-teraz.com.pl/contest/</a>
+        <br>Contest codes (1 for valid, 0 for used): 
+        
+        <?php
+            while($row = $result->fetch_object()){
+                echo "$row->code ($row->active); ";
+            }   
+        ?>
+
+        
+    </p>
     </div><br>
     
-    <div class="container">
+
     <?php
 
     if(isset($_POST['button_code'])){
@@ -38,8 +61,7 @@ $dbconnect = new DbConnect();
         } 
     }
     ?>
-    </div>
-    
+   
     <!--Form -->
     
     <form method="post" class="form-horizontal">
@@ -63,12 +85,22 @@ $dbconnect = new DbConnect();
     </form>
 
     <div id="nag2" class="container">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dicta dolor aliquam, inventore saepe nulla ipsum molestiae similique, in velit, quisquam rerum necessitatibus quae reiciendis voluptatum nisi quaerat. Aliquid vero labore, itaque ullam voluptas. Dicta, atque. Error illo numquam, velit dolor saepe autem, vitae pariatur, eligendi veritatis, delectus eius ullam. Alias eos doloribus, dignissimos iste? Voluptatibus similique obcaecati enim quaerat voluptatem esse molestias itaque, totam odio quia, maiores, sint! Minima autem perspiciatis enim, suscipit dolor ex libero distinctio soluta! Suscipit tempore laudantium sapiente, eveniet cum. Facilis quis minima omnis, odio atque laborum necessitatibus enim! Quas dolore aliquam, veniam voluptas dicta fugiat! Eius iste similique ipsum. Quo beatae repellat laborum, voluptatibus ipsam aliquam, fugit minima cumque voluptatem molestias natus quod, eos at. Fugiat commodi excepturi incidunt suscipit quidem iste cumque nostrum quaerat expedita esse odio voluptate nisi culpa quis accusamus eaque architecto nesciunt deserunt mollitia, natus nam consequatur dolorum id! Laboriosam officiis, quos et cum voluptatem molestiae harum reprehenderit illum totam iure, voluptate, ipsam ea impedit dolore magni porro illo architecto repellat suscipit labore expedita quibusdam. Aperiam dolore dicta illum ducimus reiciendis quisquam, omnis quae obcaecati sint, fugit excepturi quibusdam nisi dignissimos tenetur harum tempora, asperiores molestiae, soluta vel natus cupiditate!</p>
+        <p>       
+            The application has also admin console for customer with logging page (as well as remind page and recovery 
+            page in case of password forgotten) and list of all participated users. List of users has sorting and filtering 
+            button referring to different type of categories. It has also log out page. Without authorisation You can not 
+            enter the admin panel even when having a link. In order to change password You need to have security number - 
+            same for all 3 admins.
+            <br>
+            <br>Link to admin panel: <a href="http://tu-i-teraz.com.pl/contest/index.php?page=login">http://tu-i-teraz.com.pl/contest/index.php?page=login</a>
+            <br>Logins/password: punisher/contest1, chninkel2/contest, brian/contest3
+            <br>Security number: 1234
+
+        </p>
     </div>
 
     <div class="container">
-        <div class="row">
-    
+        <div class="row">   
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
                 <div class="carousel-inner" role="listbox">
@@ -76,35 +108,23 @@ $dbconnect = new DbConnect();
                     <div class="carousel-inner" role="listbox">
     
                         <div class="item active">
-                            <img src="img/slider1.jpg" alt="">
+                            <img src="img/slider1.jpg" alt="" style="width:100%;">
                             <div class="carousel-caption">
                             </div>
                         </div>
     
                         <div class="item">
-                            <img src="img/slider2.jpg" alt="">
+                            <img src="img/slider2.jpg" alt="" style="width:100%;">
                             <div class="carousel-caption">
                             </div>
                         </div>
     
-    
                         <div class="item">
-                            <img src="img/slider3.jpg" alt="">
+                            <img src="img/slider3.jpg" alt="" style="width:100%;">
                             <div class="carousel-caption">
                             </div>
                         </div>
 
-                        <div class="item">
-                            <img src="img/slider1.jpg" alt="">
-                            <div class="carousel-caption">
-                            </div>
-                        </div>
-    
-                        <div class="item">
-                            <img src="img/slider2.jpg" alt="">
-                            <div class="carousel-caption">
-                            </div>
-                        </div>
                     </div>
                 </div>
   

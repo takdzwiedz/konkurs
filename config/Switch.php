@@ -18,7 +18,7 @@ if(isset($_GET['page'])){
         case ('third'):
             
             $page = 'third';
-            $title = 'Contenst about Warsaw - Results';
+            $title = 'Contenst about Warsaw - Summary';
             break;
                    
         case('users'):
